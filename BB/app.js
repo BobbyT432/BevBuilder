@@ -3,6 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const sequelize = require('./db');
+const User = require('./models/user');
+const Beverage = require('./models/beverage');
+const Ingredient = require('./models/ingredient');
+const BevIng = require('./models/beving');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -13,8 +18,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-
-/*Test */
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -39,5 +42,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+async function test_setup() {
+  const sampleAcc = await User.create({username : "Admin", password: "1234"});
+  const sampleBev = await Beverage.create({name : "Lemonade", description: "A delicious refreshment!"});
+  const sampleIng = await Ingredient.create({name: "Lemon"});
+  const sampleBevIng = await BevIng.create({bev_id: sampleBev.id, ing_id: sampleIng.id, amount: 2});
+}
+
+sequelize.sync({ force: true }).then(()=>{ // this is destructive we need to do this: https://sequelize.org/docs/v6/core-concepts/model-basics/ under "Synchronization in production"
+  test_setup().then(()=> console.log("Sample data created"))
+})
 
 module.exports = app;
