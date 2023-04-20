@@ -1,7 +1,23 @@
 const sequelize = require('../db')
 const { Model, DataTypes } = require('sequelize')
 
-class Beverage extends Model {}
+class Beverage extends Model {
+  static async find_bev(bevID){
+    try {
+        const bev = await Beverage.findByPk(bevID)
+
+        if (bev){
+            return bev;
+        }
+        else {
+            return null;
+        }
+    } catch (error) {
+        console.log(error)
+        return null;
+    }
+}
+}
 
 Beverage.init({
     id: {
