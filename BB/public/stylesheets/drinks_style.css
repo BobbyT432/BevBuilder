@@ -1,0 +1,224 @@
+:root {
+
+    /* Font Style */
+    /* --ff-primary: 'Source Sans Pro', sans-serif;
+    --ff-secondary: 'Source Code Pro', monospace; */
+    /* Argentum Sans */
+    
+
+    /* Font Weight */
+    --fw-reg: 300;
+    --fw-bold: 900;
+    
+
+    /* Colors */
+    --clr-light: #fff;
+    --clr-dark: #303030;
+    --clr-primary: #e13859;
+    --clr-accent: #33bc9d;
+    --clr-accent-tinted: #0f3a3093;
+    --clr-second: #342b26;
+    --clr-tinted: #6d6d6d;
+    --clr-darkTint: #343939;
+
+
+    /* Box Shadow */
+    --bs: 0.25em 0.25em 0.75em rgba(0,0,0,.25),
+          0.125em 0.125em 0.25em rgba(0,0,0,.15);
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+/* Nav Bar */
+.topNavBar{
+    background-color: white;
+    overflow: hidden;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    height: 70px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .logoImage{
+    width: 220px;
+    transform: translate(-20px,-35px);
+  }
+  
+  .midNav{
+    color: var(--clr-dark);
+    padding-top: 10px;
+    text-align: center;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  
+  .rightNav{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    float: right;
+    align-items: center;
+  }
+  
+  .navProfileName{
+    text-align: end;
+    transform: translateY(4px);
+  }
+  
+  .navBarText{
+    text-decoration: none;
+    color: var(--clr-second);
+  }
+  
+  .navBarText:hover{
+    color: var(--clr-primary) ;
+  }
+  
+  .navText{
+    font-weight: bolder;
+  }
+  
+  .profileButton{
+    /* display: block; */
+    background: none;
+    border: none;
+    color: var(--clr-primary);
+    z-index: 1;
+  }
+  
+  .profileButton:hover{
+    color: var(--clr-accent);
+  }
+
+.heroimage{
+    height: 900px;
+    background-color: var(--clr-accent-tinted);
+    background-image: url("../images/cocktailoutside.jpg");
+    width: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-blend-mode: multiply;
+    text-align: center;
+}
+
+.title{
+    padding-top: 340px;
+    color: var(--clr-light);
+    text-shadow: 1px 1px var(--clr-dark);
+    font-size: 150px;
+    font-weight: bold;
+}
+
+#searchbar {
+    height: 90px;
+    background-color:white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 300;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+.search{
+    position: relative;
+    box-shadow: 0 0 40px rgba(51, 51, 51, .1); 
+}
+
+.search input{
+    height: 60px;
+    text-indent: 25px;
+    border: 2px solid #d6d4d4;
+}
+
+
+.search input:focus{
+    box-shadow: none;
+    border: 2px solid var(--clr-accent);
+}
+
+.search .fa-search{
+    position: absolute;
+    top: 20px;
+    left: 16px;
+}
+
+.search button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 50px;
+    width: 110px;
+    background: var(--clr-accent);
+}
+
+.search button:hover {
+    background-color: var(--clr-dark);
+}
+
+#drinkgrid {
+    height: auto;
+    background-color: var(--clr-primary);
+}
+
+.drinkgridcontainer {
+    height: auto;
+    margin-top: 70px;
+    width: 85%;
+    margin-left: 200px;
+}
+
+.featuredCollection{
+    display: grid;
+    
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.featuredItem{
+    text-decoration: none;
+    color: var(--clr-dark);
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 30px;
+}
+
+.card-body{
+    /* position: absolute; */
+    z-index: 1;
+    width: 600px;
+    height: 600px;
+    margin: 0px;
+}
+
+.card-title{
+    color: white;
+    font-size: 30px;
+}
+
+.card{
+    width: 690px;
+    height: 690px;
+    margin: 0px;
+    border: 15px solid white;
+    background-color: var(--clr-accent);
+}
+
+#footer {
+    height: 300px;
+    background-color: var(--clr-second);
+    color: white;
+}
+
+.title2{
+    padding-top: 30px;
+    color: var(--clr-light);
+    text-shadow: 1px 1px var(--clr-dark);
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
