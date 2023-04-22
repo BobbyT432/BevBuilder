@@ -36,6 +36,10 @@ Beverage.init({
     description: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    instr: { // instructions
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize, 

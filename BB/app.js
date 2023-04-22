@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session')
 const sequelize = require('./db');
+
+// Models
 const User = require('./models/user');
 const Beverage = require('./models/beverage');
 const Ingredient = require('./models/ingredient');
@@ -57,7 +59,8 @@ app.use(function(err, req, res, next) {
 
 async function test_setup() {
   const sampleAcc = await User.create({username : "Admin", password: "1234"});
-  const sampleBev = await Beverage.create({name : "Lemonade", author: "BeerBelly10024", description: "A delicious refreshment!"});
+  const sampleAcc2 = await User.create({username : "Bawb", password: "1234"});
+  const sampleBev = await Beverage.create({name : "Lemonade", author: "BeerBelly10024", description: "A delicious refreshment!", instr: "Step 1: "});
   const sampleIng = await Ingredient.create({name: "Lemon"});
   const sampleBevIng = await BevIng.create({bev_id: sampleBev.id, ing_id: sampleIng.id, amount: 2});
 }

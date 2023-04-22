@@ -8,6 +8,7 @@ const Ingredient = require('../models/ingredient');
 const BevIng = require('../models/beving');
 const Comment = require('../models/comment');
 const BevCom = require('../models/bevcom');
+const UserSaveBev = require('../models/usersavebev');
 
 /* Login */
 /* GET home page. */
@@ -108,7 +109,8 @@ router.post('/create', async function(req, res, next) {
     {
       name: req.body.drinkName,
       author: req.session.user.username,
-      description: req.body.drinkDesc
+      description: req.body.drinkDesc,
+      instr: req.body.drinkInstr
     });
   
   // Create all the new ingredients
@@ -152,7 +154,7 @@ router.post('/post-comment/:bev_id', async function(req, res, next) {
   let username = req.session.user.username;
   let comText = req.body.comText;
   let rating = req.body.rating;
-  
+
   const newCom = await Comment.create(
     {
       username: username,
@@ -167,6 +169,18 @@ router.post('/post-comment/:bev_id', async function(req, res, next) {
     });
 
     res.redirect('/home');
+});
+
+router.post('/save-bev/:bev_id', async function(req, res, next) {
+  // ADD A MESSAGE TO INDICATE THE BEVERAGE HAS BEEN SAVED
+  const newCom = await UserSaveBev.create(
+  {
+    username: req.session.user.username,
+    bev_id: req.params.bev_id
+  });
+  console.log("POST SAVED");
+
+  res.redirect('/home');
 });
 
 module.exports = router;

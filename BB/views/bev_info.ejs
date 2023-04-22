@@ -73,7 +73,10 @@
           <p id="btn"><i class="fa-solid fa-share"></i> Share</p>
         </div>
         <div class="col-sm-auto">
-          <p id="btn"><i class="fa-sharp fa-solid fa-folder-open"></i> Save</p>
+          <!--<p id="btn"><i class="fa-sharp fa-solid fa-folder-open"></i> Save</p>-->
+          <form method="POST" action=<%="/save-bev/"+ beverage.id %> >
+            <button type="submit" class="btn btn-secondary"><i class="fa-sharp fa-solid fa-folder-open"></i>Save</button>
+          </form>
         </div>
       </div>
       <div class="row">
@@ -92,6 +95,16 @@
       </div>
       <div class="row">
         <p id="desc-text"><%= beverage.description %></p>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div id="desc">
+            <h1>Instructions</h1>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <p id="desc-text"><%= beverage.instr %></p>
       </div>
       <div class="row">
         <div id="ingred-section">
