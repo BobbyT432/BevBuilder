@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session')
 const sequelize = require('./db');
 const User = require('./models/user');
 const Beverage = require('./models/beverage');
@@ -11,6 +12,7 @@ const BevIng = require('./models/beving');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var homeRouter = require('./routes/home');
 
 var app = express();
 
@@ -24,8 +26,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.set('trust proxy', 1) // from CMS demo videos
+app.use(session({
+  secret: 'beveragebuilders',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/home', homeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
