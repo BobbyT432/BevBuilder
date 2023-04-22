@@ -185,9 +185,15 @@ body{
     width: 100%;
     margin: auto;
     padding: 20px 20px 20px 20px;
+    margin-bottom: 20px;
 }
 
 #comment-text{
     font-size: 30px;
 }
 
+.comment-section{
+    height: 350px;
+    overflow: scroll;
+    overflow-x: hidden;
+}

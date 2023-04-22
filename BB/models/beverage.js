@@ -25,6 +25,10 @@ Beverage.init({
       primaryKey: true,
       autoIncrement: true
     },
+    author: { // *****************THIS WILL CHANGE, IT MUST BE BY THE USER ID, NOT NAME*****************
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false

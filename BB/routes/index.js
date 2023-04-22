@@ -6,6 +6,8 @@ const User = require('../models/user');
 const Beverage = require('../models/beverage');
 const Ingredient = require('../models/ingredient');
 const BevIng = require('../models/beving');
+const Comment = require('../models/comment');
+const BevCom = require('../models/bevcom');
 
 /* Login */
 /* GET home page. */
@@ -44,9 +46,10 @@ let ingredList = []
 // Not sure if this should be in separate file
 // split up our router into CRUD format
 router.get('/beverage/:bev_id', async function(req, res, next) {
-  // Find specific beverage
+  let bevComments = []
   let ingred = [] // stores all ingredients that is attached to the drink
 
+  // Find specific beverage
   const bev = await Beverage.find_bev(req.params.bev_id)
   if (bev) {
     const bevIng = await BevIng.findAll({ // find the relationship between ingredients and this specific beverage
@@ -54,7 +57,6 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
         bev_id: req.params.bev_id
       }
     });
-
     if (bevIng){
       for (let i = 0; i < bevIng.length; i++){
         const newIngredID = await Ingredient.findByPk(bevIng[i].ing_id)
@@ -62,7 +64,20 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
       }
     }
 
-    res.render('bev_info', { beverage: bev, ingreds: ingred });
+    // Find comments
+    const comments = await BevCom.findAll({ 
+      where: {
+        bev_id: req.params.bev_id
+      }
+    });
+    if (comments){
+      for (let i = 0; i < comments.length; i++){
+        const com = await Comment.findByPk(comments[i].com_id);
+        bevComments.push(com);
+      }
+    }
+
+    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments});
   }
   else {
     res.redirect('/');
@@ -92,7 +107,7 @@ router.post('/create', async function(req, res, next) {
   const Bev = await Beverage.create(
     {
       name: req.body.drinkName,
-      // username: req.body.username,
+      author: req.session.user.username,
       description: req.body.drinkDesc
     });
   
@@ -120,7 +135,7 @@ router.post('/add-ingred', async function(req, res, next) {
   let username = req.session.user.username;
   let newIngred = req.body.ingred;
   ingredList.push(newIngred);
-  
+
   res.render('bev_create', {username: username, ingredList: ingredList});
 });
 
@@ -131,6 +146,25 @@ router.post('/delete-ingred/:ingred_name', async function(req, res, next) {
   ingredList.splice(ingredList.indexOf(ingred), 1);
 
   res.render('bev_create', {username: username, ingredList: ingredList});
+});
+
+router.post('/post-comment/:bev_id', async function(req, res, next) {
+  let username = req.session.user.username;
+  let comText = req.body.comText;
+
+  const newCom = await Comment.create(
+    {
+      username: username,
+      text: comText
+    });
+  
+  await BevCom.create(
+    {
+      com_id: newCom.id,
+      bev_id: req.params.bev_id,
+    });
+
+    res.redirect('/home');
 });
 
 module.exports = router;
