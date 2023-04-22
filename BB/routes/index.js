@@ -9,7 +9,12 @@ const BevIng = require('../models/beving');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: "Exopresso" });
+});
+
+router.get('/home', async function(req, res, next) {
+  const bevFeatured = await Beverage.findAll()
+  res.render('home', { bevFeatured: bevFeatured });
 });
 
 // Not sure if this should be in separate file
@@ -33,6 +38,22 @@ router.put('/beverage/:bev_id', function(req, res, next) {
 });
 router.delete('/beverage/:bev_id', function(req, res, next) {
   res.render('bev_info', { title: 'Express' });
+});
+
+
+router.get('/create', async function(req, res, next) {
+    res.render('bev_create');
+});
+router.post('/create', async function(req, res, next) {
+  let drinkName = req.body.drinkName;
+  
+  const Bev = await Beverage.create(
+    {
+      name: req.body.drinkName,
+      // username: req.body.username,
+      description: req.body.drinkDesc
+    });
+  res.redirect('beverage/' + Bev.id);
 });
 
 module.exports = router;
