@@ -93,8 +93,8 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
         bevComments.push(com);
       }
     }
-
-    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments});
+    const currentUser = req.session.user
+    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments, currentUser: currentUser});
   }
   else {
     res.redirect('/');
@@ -114,7 +114,8 @@ router.delete('/beverage/:bev_id', function(req, res, next) {
 
 router.get('/create', async function(req, res, next) { 
   let username = req.session.user.username
-  res.render('bev_create', {username: username, ingredList : []});
+  const currentUser = req.session.user
+  res.render('bev_create', {username: username, ingredList : [], currentUser: currentUser});
 });
 
 router.post('/create', async function(req, res, next) {
@@ -153,8 +154,8 @@ router.post('/add-ingred', async function(req, res, next) {
   let username = req.session.user.username;
   let newIngred = req.body.ingred;
   ingredList.push(newIngred);
-
-  res.render('bev_create', {username: username, ingredList: ingredList});
+  const currentUser = req.session.user
+  res.render('bev_create', {username: username, ingredList: ingredList, currentUser: currentUser});
 });
 
 // Also a seperate form in the same page
@@ -162,8 +163,8 @@ router.post('/delete-ingred/:ingred_name', async function(req, res, next) {
   let username = req.session.user.username;
   let ingred = req.params.ingred_name;
   ingredList.splice(ingredList.indexOf(ingred), 1);
-
-  res.render('bev_create', {username: username, ingredList: ingredList});
+  const currentUser = req.session.user
+  res.render('bev_create', {username: username, ingredList: ingredList, currentUser: currentUser});
 });
 
 router.post('/post-comment/:bev_id', async function(req, res, next) {
@@ -184,7 +185,8 @@ router.post('/post-comment/:bev_id', async function(req, res, next) {
       bev_id: req.params.bev_id,
     });
 
-    res.redirect('/home');
+    const currentBev = req.params.bev_id
+    res.redirect('/beverage/' + currentBev);
 });
 
 router.post('/save-bev/:bev_id', async function(req, res, next) {
@@ -197,6 +199,11 @@ router.post('/save-bev/:bev_id', async function(req, res, next) {
   console.log("POST SAVED");
 
   res.redirect('/home');
+});
+
+router.get('/drinks', function(req, res, next) {
+  const currentUser = req.session.user
+  res.render('drinks', {currentUser: currentUser});
 });
 
 module.exports = router;

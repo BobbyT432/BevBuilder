@@ -18,13 +18,12 @@ const sessionChecker = (req, res, next)=> {
 router.use(sessionChecker)
 
 router.get('/', async function(req, res, next) {
-    console.log("User Session:")
-    console.log(req.session.user)
-   // res.render('index', { title: 'Express' });
+    // console.log("User Session:")
+    // console.log(req.session.user)
 
-    const bevFeatured = await Beverage.findAll()
+    
     const currentUser = req.session.user
-    res.render('index', { bevFeatured: bevFeatured, currentUser: currentUser });
+    res.render('profile', { currentUser: currentUser });
 });
   
 module.exports = router;

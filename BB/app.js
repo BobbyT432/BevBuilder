@@ -15,6 +15,7 @@ const BevIng = require('./models/beving');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var homeRouter = require('./routes/home');
+var profileRouter = require('./routes/profile');
 
 var app = express();
 
@@ -40,6 +41,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/home', homeRouter);
+app.use('/profile', profileRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -60,6 +62,7 @@ app.use(function(err, req, res, next) {
 async function test_setup() {
   const sampleAcc = await User.create({username : "Admin", password: "1234"});
   const sampleAcc2 = await User.create({username : "Bawb", password: "1234"});
+  const sampleAcc3 = await User.create({username : "asdf", password: "asdf"});
   const sampleBev = await Beverage.create({name : "Lemonade", author: "BeerBelly10024", description: "A delicious refreshment!", instr: "Step 1: "});
   const sampleIng = await Ingredient.create({name: "Lemon"});
   const sampleBevIng = await BevIng.create({bev_id: sampleBev.id, ing_id: sampleIng.id, amount: 2});
