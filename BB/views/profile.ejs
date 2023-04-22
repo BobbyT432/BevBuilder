@@ -1,0 +1,49 @@
+<%- include('header', {cssFile: "profile_style.css", currUser: currentUser.username}) -%>
+    
+    <section class="mainSection">
+        <div class="row">
+            <!--LEFT AREA-->
+            <div class="col-3">
+                <div class="leftArea">
+                    
+                </div>
+            </div>
+            <!--MAIN AREA -->
+            <div class="col-6">
+                <div class="centerArea">
+                    <div class="contentArea">
+                        <div class="tabBar">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+                                  <a class="nav-link active" aria-current="page" href="#">My Recipes</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#">saved Recipes</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#">Comments</a>
+                                </li>
+                              </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--RIGHT AREA-->
+            <div class="col-3">
+                <div class="rightArea">
+                    <div class="profileBox">
+                        <div class="topPart">
+                            <div class="profImage">
+                                <h1>P</h1>
+                            </div>
+                        </div>
+                        <div class="botPart">
+                            <h2 class="profileBoxText">Username: <%= currentUser.username %></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </section>
+
+<%- include('footer') -%>

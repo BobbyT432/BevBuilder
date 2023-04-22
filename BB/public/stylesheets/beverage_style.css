@@ -94,6 +94,7 @@ body{
     border: none;
     color: var(--clr-primary);
     z-index: 1;
+    margin-left: 5px;
   }
   
   .profileButton:hover{

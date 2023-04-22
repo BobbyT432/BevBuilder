@@ -88,6 +88,7 @@ body {
     border: none;
     color: var(--clr-primary);
     z-index: 1;
+    margin-left: 5px;
   }
   
   .profileButton:hover{
@@ -174,7 +175,7 @@ body {
 .featuredCollection{
     display: grid;
     
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 }
 
 .featuredItem{
@@ -187,10 +188,11 @@ body {
 
 .card-body{
     /* position: absolute; */
-    z-index: 1;
-    width: 600px;
+    /* z-index: 1; */
+    /* width: 400px;
     height: 600px;
-    margin: 0px;
+    margin: 0px; */
+    margin: 0%;
 }
 
 .card-title{
@@ -199,11 +201,17 @@ body {
 }
 
 .card{
-    width: 690px;
-    height: 690px;
+    width: 400px;
+    height: 600px;
     margin: 0px;
-    border: 15px solid white;
+    border: 5px solid white;
     background-color: var(--clr-accent);
+}
+
+.drinkCardTop{
+  width: 100%;
+  margin-left: -16px;
+  margin-top: -16px;
 }
 
 #footer {
@@ -222,3 +230,7 @@ body {
     margin-bottom: 16px;
 }
 
+.drinkCardTopImg{
+    width: 393px;
+    height: 400px;
+}
