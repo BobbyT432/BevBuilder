@@ -29,6 +29,22 @@ router.post('/login', async function(req, res, next) {
   }
 });
 
+/* Register */
+router.post('/signup', function(req, res, next) {
+  res.render('register')
+});
+
+router.post('/create-user', async function(req, res, next) {
+  console.log(req.body.username+" - "+req.body.password);
+
+  const user = await User.create({
+    username: req.body.username,
+    password: req.body.password
+  });
+
+  res.redirect('/')
+});
+/**/
 
 const sessionChecker = (req, res, next)=> {
   if(req.session.user) {

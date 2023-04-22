@@ -169,12 +169,15 @@
           </div>
         </div>
         <div class="col">
-          <!-- <i style="color: #e13859" class="fa-solid fa-star"></i>
+          <% for (let i = 0; i < comment.rating; i++) {%>
+          <i style="color: #e13859" class="fa-solid fa-star"></i> <!--
           <i style="color: #e13859" class="fa-solid fa-star"></i>
           <i style="color: #e13859" class="fa-solid fa-star"></i>
           <i style="color: #e13859" class="fa-solid fa-star"></i>
           <i style="color: #e13859" class="fa-solid fa-star"></i> -->
-          Rating: <%= comment.rating %>
+          <% } %> 
+          <!--Rating: <%= comment.rating %>-->
+
         </div>
         <div class="row">
           <p id="comment-text"><%= comment.text %></p>
