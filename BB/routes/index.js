@@ -151,11 +151,13 @@ router.post('/delete-ingred/:ingred_name', async function(req, res, next) {
 router.post('/post-comment/:bev_id', async function(req, res, next) {
   let username = req.session.user.username;
   let comText = req.body.comText;
-
+  let rating = req.body.rating;
+  
   const newCom = await Comment.create(
     {
       username: username,
-      text: comText
+      text: comText,
+      rating: rating
     });
   
   await BevCom.create(

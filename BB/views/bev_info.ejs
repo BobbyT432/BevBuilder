@@ -128,10 +128,11 @@
               </div>
               <form method="POST" action=<%="/post-comment/"+ beverage.id %> >
                   <div class="modal-body">
-
+                    <!-- Add a comment section -->
                     <label for="drinkDesc" class="form-label">Comment</label>
                     <textarea type="text" class="form-control" id="comText" name="comText" placeholder="Your comment" value="" required></textarea>
-
+                    <input type="text" class="form-control" id="rating" name="rating" placeholder="rating 1 - 5" value="" required>
+                    <!---->
                   </div>
                   <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -144,22 +145,23 @@
       <!---->
           </div>
       </div>
-      
+
       <div class="comment-section">
       <!--Comments-->
       <% for (comment of comments) { %>
       <div class="row" id="comment">
         <div class="col">
           <div>
-            <h3><%=comment.username %></h3>
+            <h3><%= comment.username %></h3>
           </div>
         </div>
         <div class="col">
+          <!-- <i style="color: #e13859" class="fa-solid fa-star"></i>
           <i style="color: #e13859" class="fa-solid fa-star"></i>
           <i style="color: #e13859" class="fa-solid fa-star"></i>
           <i style="color: #e13859" class="fa-solid fa-star"></i>
-          <i style="color: #e13859" class="fa-solid fa-star"></i>
-          <i style="color: #e13859" class="fa-solid fa-star"></i>
+          <i style="color: #e13859" class="fa-solid fa-star"></i> -->
+          Rating: <%= comment.rating %>
         </div>
         <div class="row">
           <p id="comment-text"><%= comment.text %></p>
