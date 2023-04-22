@@ -100,7 +100,11 @@
       </div>
       <div class="row">
         <div id="ingred-photo">
-          <p id="photo-title">INGREDIENT LIST</p>
+        <ul>
+          <% for (ingred of ingreds) { %>
+          <li><p><%=ingred%></p></li>
+          <% } %>
+        </ul>
         </div>
       </div>
       <div class="row" id="comment-header">

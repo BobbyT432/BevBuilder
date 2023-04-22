@@ -18,19 +18,21 @@
   })
 })()
 
-// Adding ingredients
-var counter= 4;
+// // Adding ingredients
+// var counter= 4;
 
-function addelement() {
-var completelist= document.getElementById("ing-list");
+// function add_ingred() {
+// var completelist= document.getElementById("ing-list");
 
-completelist.innerHTML += "<li class=\"list-group-item d-flex justify-content-between lh-sm\">";
-completelist.innerHTML += "<div>";
-completelist.innerHTML += "<h6 class=\"my-0\">Ingredient</h6>";
-completelist.innerHTML += "<small class=\"text-muted\">Optional / Required</small>";
-completelist.innerHTML += "</div>";
-completelist.innerHTML += "<span class=\"text-muted\">Amount</span>";
-completelist.innerHTML += "</li>";
+// completelist.innerHTML += "<li class=\"list-group-item d-flex justify-content-between lh-sm\">";
+// completelist.innerHTML += "<div>";
+// completelist.innerHTML += "<h6 class=\"my-0\">Ingredient</h6>";
+// completelist.innerHTML += "<small class=\"text-muted\">Optional / Required</small>";
+// completelist.innerHTML += "</div>";
+// completelist.innerHTML += "<span class=\"text-muted\">Amount</span>";
+// completelist.innerHTML += "</li>";
 
-counter++;
-}
+
+
+// counter++;
+// }
