@@ -69,6 +69,8 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
   // Find specific beverage
   const bev = await Beverage.find_bev(req.params.bev_id)
   if (bev) {
+    const avgRating = await Beverage.get_avg(bev.id);
+
     const bevIng = await BevIng.findAll({ // find the relationship between ingredients and this specific beverage
       where: {
         bev_id: req.params.bev_id
@@ -94,7 +96,7 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
       }
     }
     const currentUser = req.session.user
-    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments, currentUser: currentUser});
+    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments, currentUser: currentUser, avgRating: avgRating});
   }
   else {
     res.redirect('/');
