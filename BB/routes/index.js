@@ -74,6 +74,7 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
     // Update ratings (this is to show the ratings externally on other pages)
     bev.rating = avgRating
     bev.save()
+    console.log("Rating :", avgRating)
 
     const bevIng = await BevIng.findAll({ // find the relationship between ingredients and this specific beverage
       where: {

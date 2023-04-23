@@ -49,13 +49,17 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div id="stars">
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <% for (let i=0; i < (Math.floor(item.rating)); i++) {%>
+                                                            <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                                                          <% } %>
+                                                          <% if (((item.rating * 10) % 10) != 0) { %>
+                                                            <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                                                          <% } %>
+                                                          <% for (let i=0; i < (5 - (item.rating + .99)); i++) { %>
+                                                            <i style="color: #e13859" class="fa-regular fa-star"></i>
+                                                          <% } %>
                                                         <div class="row">
-                                                            <h5>5.0 (1103)</h5>
+                                                            <h5><%= item.rating %></h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -82,13 +86,17 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div id="stars">
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <% for (let i=0; i < (Math.floor(item.rating)); i++) {%>
+                                                            <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                                                          <% } %>
+                                                          <% if (((item.rating * 10) % 10) != 0) { %>
+                                                            <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                                                          <% } %>
+                                                          <% for (let i=0; i < (5 - (item.rating + .99)); i++) { %>
+                                                            <i style="color: #e13859" class="fa-regular fa-star"></i>
+                                                          <% } %>
                                                         <div class="row">
-                                                            <h5>5.0 (1103)</h5>
+                                                            <h5><%= item.rating %></h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -118,14 +126,15 @@
                                         <div class="col">
                                             <!-- for loop -->
                                             <div id="stars">
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <div class="row">
-                                                    <h5>5.0 (1103)</h5>
-                                                </div>
+                                                <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
+                                                    <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                                                  <% } %>
+                                                  <% if (((comment.rating * 10) % 10) != 0) { %>
+                                                    <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                                                  <% } %>
+                                                  <% for (let i=0; i < (5 - (comment.rating + .99)); i++) { %>
+                                                    <i style="color: #e13859" class="fa-regular fa-star"></i>
+                                                  <% } %>
                                                 <!-- end loop -->
                                             </div>
                                         </div>

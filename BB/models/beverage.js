@@ -1,6 +1,9 @@
 const sequelize = require('../db')
 const { Model, DataTypes } = require('sequelize')
 
+const BevCom = require('./bevcom');
+const Comment = require('./comment');
+
 class Beverage extends Model {
   static async find_bev(bevID){
     try {
@@ -65,7 +68,6 @@ class Beverage extends Model {
         }
         return ((sum === 0) ? sum : sum / bevComments.length);
         }
-
         else {
             return null;
         }
