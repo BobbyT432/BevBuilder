@@ -207,10 +207,14 @@ router.post('/save-bev/:bev_id', async function(req, res, next) {
   res.redirect('/home');
 });
 
-
-router.get('/drinks', function(req, res, next) {
+router.get('/drinks', async function(req, res, next) {
   const currentUser = req.session.user
-  res.render('drinks', {currentUser: currentUser});
+  const drinks = await Beverage.findAll()
+  const ingredients = await Ingredient.findAll()
+
+  res.render('drinks', {drinks: drinks, currentUser: currentUser, ingredients: ingredients});
 });
+
+
 
 module.exports = router;
