@@ -13,6 +13,8 @@
     --fw-reg: 300;
     --fw-bold: 900;
     
+    /* Border Radius */
+    --corners: 5px;
 
     /* Colors */
     --clr-light: #fff;
@@ -22,6 +24,7 @@
     --clr-second: #342b26;
     --clr-tinted: #6d6d6d;
     --clr-darkTint: #343939;
+    --clr-bg: #eeeeee;
 
 
     /* Box Shadow */
@@ -31,7 +34,7 @@
 
 
 body{
-    background-color: #342b26 !important;
+    background-color: var(--clr-bg) !important;
     color: #342b26 !important;
 }
 
@@ -42,55 +45,74 @@ body{
     justify-content: space-between;
     padding-top: 10px;
     padding-bottom: 5px;
-    height: 90px;
+    height: 70px;
     padding-left: 50px;
     padding-right: 50px;
-}
-
-#logo-photo{
-    padding-top: 0px;
-    padding-bottom: 200px !important;
-    width: 100%;
-    height: 100%;
-    float: top;
-}
-
-.logoButton{
-    background: none;
-    border: none;
-    height: 50px;
-    z-index: 1;
-}
-
-.midNav{
+  }
+  
+  .logoImage{
+    width: 220px;
+    transform: translate(-20px,-35px);
+  }
+  
+  .midNav{
     color: var(--clr-dark);
     padding-top: 10px;
     text-align: center;
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  
+  .rightNav{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-
-.rightNav{
+    grid-template-columns: 1fr 1fr;
     float: right;
-}
-
-.profileButton{
+    align-items: center;
+  }
+  
+  .navProfileName{
+    text-align: end;
+    transform: translateY(4px);
+  }
+  
+  .navBarText{
+    text-decoration: none;
+    color: var(--clr-second);
+  }
+  
+  .navBarText:hover{
+    color: var(--clr-primary) ;
+  }
+  
+  .navText{
+    font-weight: bolder;
+  }
+  
+  .profileButton{
     /* display: block; */
     background: none;
     border: none;
     color: var(--clr-primary);
     z-index: 1;
-}
+    margin-left: 5px;
+  }
+  
+  .profileButton:hover{
+    color: var(--clr-accent);
+  }
 
+
+/* Content */
 .content{
-    height: 2000px;
+    height: auto;
     width: 1000px;
     margin-top: 70px !important;
     background-color: white;
     margin: auto;
-    border-radius: 25px;
+    border-radius: var(--corners);
     padding: 50px 50px 50px 50px;
     margin-bottom: 50px;
+    overflow: hidden;
 }
 
 #drink-name{
@@ -128,7 +150,7 @@ body{
     width: 900px;
     height: 500px;
     margin-top: 20px;
-    border-radius: 25px;
+    border-radius: var(--corners);
 }
 
 #photo-title{
@@ -159,7 +181,7 @@ body{
     width: 900px;
     height: 500px;
     margin-top: 20px;
-    border-radius: 25px;
+    border-radius: var(--corners);
 }
 
 #comment-header{
@@ -177,7 +199,7 @@ body{
 }
 
 #comment{
-    border-radius: 25px;
+    border-radius: var(--corners);
     border-style: solid;
     border-width: 2px;
     border-color: black;
@@ -185,8 +207,34 @@ body{
     width: 100%;
     margin: auto;
     padding: 20px 20px 20px 20px;
+    margin-bottom: 20px;
 }
 
 #comment-text{
     font-size: 30px;
 }
+
+.comment-section{
+    height: 350px;
+    /* background-color: #33bc9d; */
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+
+/* FOOTER */
+#footer {
+    height: 300px;
+    background-color: var(--clr-second);
+    color: white;
+  }
+  
+  .title2{
+    padding-top: 30px;
+    color: var(--clr-light);
+    text-shadow: 1px 1px var(--clr-dark);
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 16px;
+  }
