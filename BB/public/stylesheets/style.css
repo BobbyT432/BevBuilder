@@ -44,6 +44,13 @@ a {
   padding-bottom: 20px;
 }
 
+.sectionTitle2{
+  padding-top: 20px;
+  text-align: center;
+  font-weight: var(--fw-bold);
+  padding-bottom: 20px;
+  color: white;
+}
 
 /* Nav Bar */
 .topNavBar{
@@ -192,6 +199,17 @@ a {
   margin-right: 15%;
 }
 
+.aboutText2{
+  color: white;
+  text-align: center;
+  font-size: larger;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.card-img-overlay {
+  background-color: rgba(#000, 0.4);
+}
 
 /* TO DO */
 .todoSection{
