@@ -70,6 +70,10 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
   const bev = await Beverage.find_bev(req.params.bev_id)
   if (bev) {
     const avgRating = await Beverage.get_avg(bev.id);
+    
+    // Update ratings (this is to show the ratings externally on other pages)
+    bev.rating = avgRating
+    bev.save()
 
     const bevIng = await BevIng.findAll({ // find the relationship between ingredients and this specific beverage
       where: {
@@ -202,6 +206,7 @@ router.post('/save-bev/:bev_id', async function(req, res, next) {
 
   res.redirect('/home');
 });
+
 
 router.get('/drinks', function(req, res, next) {
   const currentUser = req.session.user

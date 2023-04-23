@@ -83,7 +83,23 @@ Beverage.init({
     },
     image: {
       type: DataTypes.STRING,
+    },
+    // Rating: { // TEST
+    //   type: DataTypes.INTEGER,
+    //   allowNull: true,
+    //   defaultValue: 0
+    // }
+    rating: { // TEST
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 0,
+      set(value) {
+        // Storing passwords in plaintext in the database is terrible.
+        // Hashing the value with an appropriate cryptographic hash function is better.
+        this.setDataValue('rating', value);
+      }
     }
+
   }, {
     sequelize, 
     modelName: 'Beverage'
