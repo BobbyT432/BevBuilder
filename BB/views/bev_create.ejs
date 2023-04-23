@@ -20,10 +20,10 @@
                 <% for (ingred of ingredList) { %>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                   <div>
-                    <h6 class="my-0"><%= ingred %></h6>
+                    <h6 class="my-0"><%= ingred[0] %></h6>
                     <small class="text-muted">Optional / Required</small>
                   </div>
-                  <span class="text-muted">Amount</span>
+                  <span class="text-muted"><%= ingred[1] %></span>
                 </li>
                 <button type="submit" class="btn btn-secondary" formaction=<%="/delete-ingred/"+ ingred %> >Remove</button>
                 <% } %>
@@ -31,6 +31,7 @@
               </ul>
                 <div class="input-group">
                   <input type="text" class="form-control" name="ingred" placeholder="Ingredient name">
+                  <input type="text" class="form-control" name="ingredAmt" placeholder="Amount"> 
                   <button type="submit" class="btn btn-secondary" formaction="/add-ingred">Add</button>
                 </div>
               </form>
