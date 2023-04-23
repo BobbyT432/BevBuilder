@@ -56,7 +56,6 @@ class Beverage extends Model {
         return null;
     }
   }
-
 }
 
 Beverage.init({
