@@ -117,14 +117,110 @@ a {
 /* .leftArea{
 } */
 
+
+/* CENTER */
 .centerArea{
-    height: 1500px;
+    height: 1000px;
     margin-top: 50px;
     margin-bottom: 50px;
     border-radius: var(--corners);
     background-color: var(--clr-light);
 }
 
+.tabBar{
+    background-color: var(--clr-primary);
+    border-radius: var(--corners) var(--corners) 0 0;
+    height: 50px;
+}
+
+.nav-link{
+    background-color: var(--clr-light);
+    color: var(--clr-light);
+    border-radius: var(--corners) var(--corners) 0 0;
+    height: 50px;
+    font-weight: bolder;
+}
+
+.nav-link.active{
+    background-color: var(--clr-accent) !important;
+    color: var(--clr-light);
+    border-radius: var(--corners) var(--corners) 0 0;
+}
+
+.nav-link:hover{
+    color: var(--clr-second);
+}
+
+#stars{
+    float: right;
+}
+
+/* POSTED */
+.postedList{
+    margin: 20px;
+    height: 910px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.postedItem{
+    border-radius: var(--corners);
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    height: 200px;
+    width: 100%;
+    margin: auto;
+    padding: 20px 20px 20px 20px;
+    margin-bottom: 20px;
+}
+
+/* SAVED */
+.savedList{
+    margin: 20px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.savedItem{
+    border-radius: var(--corners);
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    height: 200px;
+    width: 100%;
+    margin: auto;
+    padding: 20px 20px 20px 20px;
+    margin-bottom: 20px;
+}
+
+
+/* COMMENTS */
+#comment-text{
+    font-size: 30px;
+}
+
+#comment{
+    border-radius: var(--corners);
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    height: 200px;
+    width: 100%;
+    margin: auto;
+    padding: 20px 20px 20px 20px;
+    margin-bottom: 20px;
+}
+
+.comment-section{
+    /* background-color: #33bc9d; */
+    margin: 20px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+
+/* RIGHT */
 .rightArea{
     height: 300px;
     margin-top: 50px;

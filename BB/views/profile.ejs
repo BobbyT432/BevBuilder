@@ -1,11 +1,11 @@
-<%- include('header', {cssFile: "profile_style.css", currUser: currentUser.username}) -%>
-    
+<%- include('header', {cssFile: "profile_style.css" , currUser: currentUser.username}) -%>
+
     <section class="mainSection">
         <div class="row">
             <!--LEFT AREA-->
             <div class="col-3">
                 <div class="leftArea">
-                    
+
                 </div>
             </div>
             <!--MAIN AREA -->
@@ -13,17 +13,126 @@
                 <div class="centerArea">
                     <div class="contentArea">
                         <div class="tabBar">
-                            <ul class="nav nav-pills nav-fill">
-                                <li class="nav-item">
-                                  <a class="nav-link active" aria-current="page" href="#">My Recipes</a>
+                            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="pills-posted-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-posted" type="button" role="tab"
+                                        aria-controls="pills-posted" aria-selected="true">Posted Recipes</button>
                                 </li>
-                                <li class="nav-item">
-                                  <a class="nav-link" href="#">saved Recipes</a>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-saved-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-saved" type="button" role="tab"
+                                        aria-controls="pills-saved" aria-selected="false">Saved Recipes</button>
                                 </li>
-                                <li class="nav-item">
-                                  <a class="nav-link" href="#">Comments</a>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="pills-comments-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-comments" type="button" role="tab"
+                                        aria-controls="pills-comments" aria-selected="false">Comments</button>
                                 </li>
-                              </ul>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!-- POSTED -->
+                            <div class="tab-pane fade show active" id="pills-posted" role="tabpanel"
+                                aria-labelledby="pills-posted-tab">
+                                <div class="postedList">
+                                    <% for (item of myBevs) { %>
+                                        <div class="postedItem">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h1>
+                                                        <%= item.name %>
+                                                    </h1>
+                                                    <h3>
+                                                        <%= item.author %>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div id="stars">
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <div class="row">
+                                                            <h5>5.0 (1103)</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+                            <!-- SAVED -->
+                            <div class="tab-pane fade" id="pills-saved" role="tabpanel"
+                                aria-labelledby="pills-saved-tab">
+                                <div class="savedList">
+                                    <% for (item of mySaved) { %>
+                                        <div class="savedItem">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <h1>
+                                                        <%= item.name %>
+                                                    </h1>
+                                                    <h3>
+                                                        <%= item.author %>
+                                                    </h3>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div id="stars">
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <div class="row">
+                                                            <h5>5.0 (1103)</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <% } %>
+                                </div>
+                            </div>
+                            <!-- COMMENTS -->
+                            <div class="tab-pane fade" id="pills-comments" role="tabpanel"
+                                aria-labelledby="pills-comments-tab">
+                                <div class="comment-section">
+                                    <!--Comments-->
+                                    <% for (comment of myComments) { %>
+                                    <div class="row" id="comment">
+                                        <div class="col">
+                                            <div>
+                                                <h3>
+                                                    <%= comment.username %>
+                                                </h3>
+                                                <p id="comment-text">
+                                                    <%= comment.text %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <!-- for loop -->
+                                            <div id="stars">
+                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                <div class="row">
+                                                    <h5>5.0 (1103)</h5>
+                                                </div>
+                                                <!-- end loop -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <% } %>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -38,12 +147,13 @@
                             </div>
                         </div>
                         <div class="botPart">
-                            <h2 class="profileBoxText">Username: <%= currentUser.username %></h2>
+                            <h2 class="profileBoxText">Username: <%= currentUser.username %>
+                            </h2>
                         </div>
                     </div>
                 </div>
             </div>
-          </div>
+        </div>
     </section>
 
-<%- include('footer') -%>
+    <%- include('footer') -%>
