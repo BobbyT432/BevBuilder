@@ -19,7 +19,8 @@
             <form action="/add-ingred" method="post">
               <div class="input-group" style="margin-bottom: 10px;">
                 <input type="text" class="form-control" name="ingred" placeholder="Ingredient name">
-                <button type="submit" class="btn btn-secondary" formaction="/add-ingred">Add</button>
+                <input type="text" class="form-control" name="ingredAmt" placeholder="Amount"> 
+                <button type="submit" class="btn btn-secondary" formaction="/beverage/add-ingred">Add</button>
               </div>
               <ul class="list-group mb-3" id="ing-list">
                 <!-- Ingredients -->
@@ -27,22 +28,23 @@
                   <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                       <h6 class="my-0">
-                        <%= ingred %>
+                        <%= ingred[0] %>
                       </h6>
-                      <small class="text-muted">Optional / Required</small>
+                      <small class="text-muted">Ingredient</small>
                     </div>
-                    <span class="text-muted">Amount</span>
+                    <span class="text-muted"><%= ingred[1] %></span>
                   </li>
-                  <button type="submit" class="btn btn-secondary" formaction=<%="/delete-ingred/" + ingred %>
-                    >Remove</button>
+                  <button type="submit" class="btn btn-secondary" formaction=<%="/beverage/delete-ingred/" + ingred %>
+                    style="margin-bottom: 10px;">Remove</button>
                   <% } %>
                     <!---->
               </ul>
+
             </form>
           </div>
           <div class="col-md-7 col-lg-8">
             <h4 class="mb-3">Drink Information</h4>
-            <form class="needs-validation" novalidate action="/create" method="post">
+            <form class="needs-validation" novalidate action="/beverage/create" method="post">
               <div class="row g-3">
 
                 <div class="col-sm-6">

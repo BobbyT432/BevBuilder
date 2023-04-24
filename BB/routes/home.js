@@ -23,18 +23,16 @@ router.get('/', async function(req, res, next) {
     console.log(req.session.user)
    // res.render('index', { title: 'Express' });
 
-    const bevFeatured = await Beverage.findAll({
-      where: {
-        rating: {
-          [Op.gte]: 4
-        }
+   const bevFeatured = await Beverage.findAll({
+    where: {
+      rating: {
+        [Op.gte]: 4
       }
-    })
+    }
+  })
 
     const currentUser = req.session.user
     res.render('index', { bevFeatured: bevFeatured, currentUser: currentUser });
 });
-
-
   
 module.exports = router;

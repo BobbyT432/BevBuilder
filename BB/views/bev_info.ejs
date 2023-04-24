@@ -19,7 +19,7 @@
               <% if (((avgRating * 10) % 10) !=0) { %>
                 <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
                 <% } %>
-                  <% for (let i=0; i < (5 - (avgRating + .99)); i++) { %>
+                  <% for (let i=0; i < (4.01 - (avgRating)); i++) { %>
                     <i style="color: #e13859" class="fa-regular fa-star"></i>
                     <% } %>
 
@@ -31,13 +31,9 @@
         </div>
       </div>
     </div>
+
     <div class="row" id="header-btn">
       <div class="col-sm-auto">
-        <!-- <p id="btn"><i class="fa-solid fa-share"></i> Share</p> -->
-        <!-- <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-share"></i>Share</button> -->
-
-
-
         <!-- Share button -->
         <button type="button" style="margin-bottom: 10px; border: none" class="btn btn-primary" data-bs-toggle="modal"
           data-bs-target="#shareModal" id="sharebutton">
@@ -69,36 +65,35 @@
           </div>
         </div>
         <!---->
-
-
-
-
-
       </div>
 
       <!-- SAVE -->
       <% if (isSaved) { %>
         <div class="col-sm-auto">
-          <form method="POST" action=<%="/unsave-bev/" + beverage.id %> >
-            <button type="submit" class="btn btn-secondary" id="savedButton"><i class="fa-solid fa-check-to-slot"></i>
-              Saved</button>
+          <form method="POST" action=<%="/beverage/unsave-bev/" + beverage.id %> >
+            <button type="submit" class="btn btn-secondary" style="background-color:#e13859; border-color:#e13859;"><i
+                class="fa-solid fa-check-to-slot"></i> Saved</button>
           </form>
         </div>
         <% } else {%>
           <div class="col-sm-auto">
-            <form method="POST" action=<%="/save-bev/" + beverage.id %> >
-              <button type="submit" class="btn btn-secondary" id="saveButton"><i class="fa-solid fa-bookmark"></i>
-                Save</button>
+            <form method="POST" action=<%="/beverage/save-bev/" + beverage.id %> >
+              <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-bookmark"></i> Save</button>
             </form>
           </div>
           <% } %>
-
     </div>
+
     <div class="row">
       <div class="col">
-        <div id="profile-photo">
-          <p id="photo-title">DRINK PHOTO</p>
+        <div id="profile-photo" style="display: flex;
+        justify-content: center;">
+          <img src="/images/great-cocktails-9PyQwwmZxpI-unsplash.jpg" alt="Avatar" style=" max-width: 100%;
+                                    max-height: 100%;
+                                    ">
+
         </div>
+
       </div>
     </div>
     <div class="row">
@@ -166,14 +161,15 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">New Comment</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form method="POST" action=<%="/post-comment/" + beverage.id %> >
+              <form method="POST" action=<%="/beverage/post-comment/" + beverage.id %> >
                 <div class="modal-body">
                   <!-- Add a comment section -->
                   <label for="drinkDesc" class="form-label">Comment</label>
                   <textarea type="text" class="form-control" id="comText" name="comText" placeholder="Your comment"
                     value="" required></textarea>
-                  <input type="text" class="form-control" id="rating" name="rating" placeholder="rating 1 - 5" value=""
-                    required>
+                  <input type="range" id="rating" name="rating" value="1" min="1" max="5" step="0.5"
+                    oninput="this.nextElementSibling.value = this.value" required>
+                  <output>1</output>
                   <!---->
                 </div>
                 <div class="modal-footer">
@@ -190,34 +186,46 @@
 
     <div class="comment-section">
       <!--Comments-->
-      <% for (comment of comments) { %>
-        <div class="row" id="comment">
-          <div class="col">
-            <div>
-              <h3>
-                <%= comment.username %>
-              </h3>
+      <% if (comments !=null) { %>
+        <% for (comment of comments) { %>
+          <div class="row" id="comment">
+            <div class="col">
+              <div>
+                <h3>
+                  <%= comment.username %>
+                </h3>
+              </div>
+            </div>
+            <div class="col">
+              <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
+                <i style="color: #e13859" class="fa-solid fa-star"></i>
+                <% } %>
+                  <% if (((comment.rating * 10) % 10) !=0) { %>
+                    <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                    <% } %>
+                      <% for (let i=0; i < (4.01 - (avgRating)); i++) { %>
+                        <i style="color: #e13859" class="fa-regular fa-star"></i>
+                        <% } %>
+                          <% if (currentUser.username=='Admin' ) { %>
+                            <form method="POST" action=<%="/beverage/delete-comment/" + comment.id + "-" + beverage.id
+                              %>
+                              >
+                              <button type="submit" class="btn btn-secondary"
+                                style="float: right; transform: translateY(-20px);">Remove</button>
+                            </form>
+                            <% } %>
+            </div>
+            <div class="row">
+              <p id="comment-text">
+                <%= comment.text %>
+              </p>
             </div>
           </div>
-          <div class="col">
-            <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
-              <i style="color: #e13859" class="fa-solid fa-star"></i>
-              <% } %>
-                <% if (((comment.rating * 10) % 10) !=0) { %>
-                  <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
-                  <% } %>
-                    <% for (let i=0; i < (5 - (comment.rating + .99)); i++) { %>
-                      <i style="color: #e13859" class="fa-regular fa-star"></i>
-                      <% } %>
-          </div>
-          <div class="row">
-            <p id="comment-text">
-              <%= comment.text %>
-            </p>
-          </div>
-        </div>
-        <% } %>
-          <!---->
+          <% } %>
+            <% } %>
+              <!---->
     </div>
   </div>
+
+
   <%- include('footer') -%>

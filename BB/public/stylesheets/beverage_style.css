@@ -32,16 +32,14 @@
           0.125em 0.125em 0.25em rgba(0,0,0,.15);
 }
 
+/* html{
+  scroll-behavior: auto !important; 
+} */
+
 
 body{
     background-color: var(--clr-bg) !important;
     color: #342b26 !important;
-}
-
-html {
-
-  scroll-behavior: auto !important;
-
 }
 
 /* Nav Bar */
@@ -181,6 +179,15 @@ html {
     padding-top: 30px;
 }
 
+#ingred-photo{
+    background-color: #33bc9d;
+    margin: auto;
+    width: 900px;
+    height: 500px;
+    margin-top: 20px;
+    border-radius: var(--corners);
+}
+
 .ingredArea{
   margin-top: 20px;
   margin-bottom: 20px;
@@ -191,15 +198,6 @@ html {
 
 .ingredList{
   list-style-type: none;
-}
-
-#ingred-photo{
-    background-color: #33bc9d;
-    margin: auto;
-    width: 900px;
-    height: 500px;
-    margin-top: 20px;
-    border-radius: var(--corners);
 }
 
 #comment-header{
@@ -235,7 +233,7 @@ html {
 .comment-section{
     height: 350px;
     /* background-color: #33bc9d; */
-    overflow: auto;
+    overflow: scroll;
     overflow-x: hidden;
 }
 
@@ -270,7 +268,6 @@ html {
   background-color: #c0314e;
 }
 
-
 /* FOOTER */
 #footer {
     height: 300px;
@@ -287,3 +284,48 @@ html {
     text-align: center;
     margin-bottom: 16px;
   }
+
+  .review-range{
+    height: 80px;
+    width: 380px;
+    border-radius: 10px;
+    padding: 0 65px 0 45px;
+  }
+
+  .review-range .review-field{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .review-range .review-field input{
+    height: 3px;
+    width: 100%;
+    background: #ddd;
+    border-radius: 5px;
+  }
+
+input[type='range'] {
+  overflow: hidden;
+  width: 80px;
+  -webkit-appearance: none;
+  background-color: #303030;
+}
+
+input[type='range']::-webkit-slider-runnable-track {
+  height: 10px;
+  -webkit-appearance: none;
+  color: #e13859;
+  margin-top: -1px;
+}
+
+input[type='range']::-webkit-slider-thumb {
+  width: 10px;
+  -webkit-appearance: none;
+  height: 10px;
+  cursor: ew-resize;
+  background: #6d6d6d;
+  box-shadow: -80px 0 0 80px #e13859;
+}

@@ -31,7 +31,7 @@ router.get('/', async function(req, res, next) {
     });
 
     countListCreate = []
-    for (theBev of myBevs){
+    for (let theBev of myBevs){
       const thisCom = await Beverage.get_comments(theBev.id)
       countListCreate.push(thisCom)
     }
@@ -46,7 +46,7 @@ router.get('/', async function(req, res, next) {
     //get each beverage information
     tempList = []
     countListSaved = []
-    for (bevId of mySavedBevIds){
+    for (let bevId of mySavedBevIds){
       const bevInfo = await Beverage.findByPk(bevId.bev_id)
       const bevComments = await Beverage.get_comments(bevId.bev_id)
       countListSaved.push(bevComments)
