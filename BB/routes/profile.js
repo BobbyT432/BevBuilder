@@ -51,6 +51,15 @@ router.get('/', async function(req, res, next) {
         username: currentUser.username
       }
     })
+
+    // // testing
+    // const comments = await BevCom.findAll({ 
+    //   where: {
+    //     bev_id: req.params.bev_id
+    //   }
+    // });
+    // //
+
     console.log("COMMENTS")
     console.log(myComments)
     

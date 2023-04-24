@@ -1,6 +1,5 @@
 <!-- Individual Drink Page (bobby workin on this) -->
 <%- include('header', {cssFile: "beverage_style.css", currUser: currentUser.username}) -%>
-
     <div class="content">
       <div class="container">
         <main>
@@ -14,7 +13,7 @@
                 <span class="text-primary">Ingredients</span>
                 <span class="badge bg-primary rounded-pill"><%= ingredList.length %></span>
               </h4>
-              <form action="/add-ingred" method="post">
+              <form action="/beverage/add-ingred" method="post">
               <ul class="list-group mb-3" id="ing-list">
                 <!-- Ingredients -->
                 <% for (ingred of ingredList) { %>
@@ -25,20 +24,20 @@
                   </div>
                   <span class="text-muted"><%= ingred[1] %></span>
                 </li>
-                <button type="submit" class="btn btn-secondary" formaction=<%="/delete-ingred/"+ ingred %> >Remove</button>
+                <button type="submit" class="btn btn-secondary" formaction=<%="/beverage/delete-ingred/"+ ingred %> >Remove</button>
                 <% } %>
                 <!---->
               </ul>
                 <div class="input-group">
                   <input type="text" class="form-control" name="ingred" placeholder="Ingredient name">
                   <input type="text" class="form-control" name="ingredAmt" placeholder="Amount"> 
-                  <button type="submit" class="btn btn-secondary" formaction="/add-ingred">Add</button>
+                  <button type="submit" class="btn btn-secondary" formaction="/beverage/add-ingred">Add</button>
                 </div>
               </form>
             </div>
             <div class="col-md-7 col-lg-8">
               <h4 class="mb-3">Drink Information</h4>
-              <form class="needs-validation" novalidate action="/create" method="post">
+              <form class="needs-validation" novalidate action="/beverage/create" method="post">
                 <div class="row g-3">
 
                   <div class="col-sm-6">

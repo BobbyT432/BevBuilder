@@ -76,7 +76,7 @@
 
       </div>
       <div class="col-sm-auto">
-        <form method="POST" action=<%="/save-bev/" + beverage.id %> >
+        <form method="POST" action=<%="/beverage/save-bev/" + beverage.id %> >
           <button type="submit" class="btn btn-secondary"><i class="fa-sharp fa-solid fa-folder-open"></i>Save</button>
         </form>
       </div>
@@ -148,7 +148,7 @@
                 <h1 class="modal-title fs-5" id="exampleModalLabel">New Comment</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <form method="POST" action=<%="/post-comment/" + beverage.id %> >
+              <form method="POST" action=<%="/beverage/post-comment/" + beverage.id %> >
                 <div class="modal-body">
                   <!-- Add a comment section -->
                   <label for="drinkDesc" class="form-label">Comment</label>
