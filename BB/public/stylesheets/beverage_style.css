@@ -184,6 +184,18 @@ body{
     border-radius: var(--corners);
 }
 
+.ingredArea{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 460px;
+}
+
+.ingredList{
+  list-style-type: none;
+}
+
 #comment-header{
     padding-top: 40px;
    
@@ -221,6 +233,36 @@ body{
     overflow-x: hidden;
 }
 
+.container::-webkit-scrollbar{
+  display: none;
+}
+
+#sharebutton{
+  background-color: var(--clr-accent);
+  border: none;
+}
+
+#sharebutton:hover{
+  background-color: #2da387;
+}
+
+#saveButton{
+  border: none;
+  background-color: var(--clr-second);
+}
+
+#saveButton:hover{
+  background-color: #1d1714;
+}
+
+#savedButton{
+  border: none;
+  background-color: var(--clr-primary);
+}
+
+#savedButton:hover{
+  background-color: #c0314e;
+}
 
 /* FOOTER */
 #footer {

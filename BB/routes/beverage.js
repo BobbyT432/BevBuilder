@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+const { Op } = require("sequelize");
 var router = express.Router();
 
 // const multer = require('multer');
@@ -63,12 +64,10 @@ router.get('/:bev_id', async function (req, res, next) {
     const bev = await Beverage.find_bev(req.params.bev_id)
     if (bev) {
         const avgRating = await Beverage.get_avg(bev.id);
-
+        
         // Update ratings (this is to show the ratings externally on other pages)
         bev.rating = avgRating
         bev.save()
-
-        console.log("Rating :", avgRating)
 
         const bevIng = await BevIng.findAll({ // find the relationship between ingredients and this specific beverage
             where: {
@@ -95,8 +94,18 @@ router.get('/:bev_id', async function (req, res, next) {
             }
         }
 
+        const checkifsaved = await UserSaveBev.findOne({
+            where: {
+              bev_id: req.params.bev_id
+            }
+          })
+          let isSaved = true
+          if (checkifsaved == null){
+            isSaved = false
+          }
+
         const currentUser = req.session.user
-        res.render('bev_info', { beverage: bev, ingreds: ingred, comments: bevComments, currentUser: currentUser, avgRating: avgRating });
+        res.render('bev_info', { beverage: bev, ingreds: ingred, comments: bevComments, currentUser: currentUser, avgRating: avgRating, isSaved: isSaved });
     }
     else {
         res.redirect('/');
@@ -193,5 +202,23 @@ router.post('/save-bev/:bev_id', async function (req, res, next) {
 
     res.redirect('/beverage/' + req.params.bev_id);
 });
+
+router.post('/unsave-bev/:bev_id', async function(req, res, next) {
+    // ADD A MESSAGE TO INDICATE THE BEVERAGE HAS BEEN UN-SAVED
+    const getTheId = await UserSaveBev.findOne({
+      where: {
+        [Op.and]: [ {bev_id: req.params.bev_id}, {username: req.session.user.username} ]
+      }
+    })
+    await UserSaveBev.destroy({
+      where: {
+        id: getTheId.id
+      }
+    })
+    console.log("POST UN-SAVED");
+  
+    const currentBev = req.params.bev_id
+    res.redirect('/beverage/' + currentBev);
+  });
 
 module.exports = router;

@@ -30,6 +30,12 @@ router.get('/', async function(req, res, next) {
       }
     });
 
+    countListCreate = []
+    for (let theBev of myBevs){
+      const thisCom = await Beverage.get_comments(theBev.id)
+      countListCreate.push(thisCom)
+    }
+
     //get list of saved beverages
     const mySavedBevIds = await UserSaveBev.findAll({
         where: {
@@ -39,8 +45,11 @@ router.get('/', async function(req, res, next) {
 
     //get each beverage information
     tempList = []
-    for (bevId of mySavedBevIds){
+    countListSaved = []
+    for (let bevId of mySavedBevIds){
       const bevInfo = await Beverage.findByPk(bevId.bev_id)
+      const bevComments = await Beverage.get_comments(bevId.bev_id)
+      countListSaved.push(bevComments)
       tempList.push(bevInfo)
     }
     const mySaved = tempList
@@ -51,20 +60,9 @@ router.get('/', async function(req, res, next) {
         username: currentUser.username
       }
     })
-
-    // // testing
-    // const comments = await BevCom.findAll({ 
-    //   where: {
-    //     bev_id: req.params.bev_id
-    //   }
-    // });
-    // //
-
-    console.log("COMMENTS")
-    console.log(myComments)
     
     //pass to ejs
-    res.render('profile', { currentUser: currentUser, myBevs: myBevs, mySaved: mySaved, myComments: myComments });
+    res.render('profile', { currentUser: currentUser, myBevs: myBevs, mySaved: mySaved, myComments: myComments, savedBevComs: countListSaved, createdBevComs: countListCreate});
 });
   
 module.exports = router;

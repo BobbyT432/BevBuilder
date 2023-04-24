@@ -183,6 +183,11 @@ a {
   height: 300px;
 }
 
+.emptyFeature{
+  color: var(--clr-primary);
+  text-align: center;
+}
+
 
 /* ABOUT */
 .aboutSection{
