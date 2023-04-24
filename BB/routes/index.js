@@ -10,9 +10,7 @@ const BevIng = require('../models/beving');
 const Comment = require('../models/comment');
 const BevCom = require('../models/bevcom');
 const UserSaveBev = require('../models/usersavebev');
-const Comment = require('../models/comment');
-const BevCom = require('../models/bevcom');
-const UserSaveBev = require('../models/usersavebev');
+
 
 /* Login */
 /* GET home page. */
@@ -77,29 +75,19 @@ router.post('/contact', function (req, res, next) {
 // Global Variables (not sure if this is the best approach, we could store this in the session but that seems overkill)
 let ingredList = []
 
-router.post('/login', async function(req, res, next) {
-  console.log(req.body.username+" - "+req.body.password);
+router.post('/login', async function (req, res, next) {
+  console.log(req.body.username + " - " + req.body.password);
 
   const user = await User.find_user(req.body.username, req.body.password)
 
-  if(user!== null) {
+  if (user !== null) {
     req.session.user = user
     res.redirect("/home")
   } else {
     res.redirect("/?msg=fail")
   }
-  
-});
-router.post('/beverage/:bev_id', function(req, res, next) {
-  res.render('bev_info', { title: 'Express' });
-});
-router.put('/beverage/:bev_id', function(req, res, next) {
-  res.render('bev_info', { title: 'Express' });
-});
-router.delete('/beverage/:bev_id', function(req, res, next) {
-  res.render('bev_info', { title: 'Express' });
-});
 
+});
 
 router.get('/drinks', async function (req, res, next) {
   const currentUser = req.session.user
@@ -108,13 +96,13 @@ router.get('/drinks', async function (req, res, next) {
 
   let ingArray = []
   let ingNames = []
-  for (let i =0; i<ingredients.length; i++) {
+  for (let i = 0; i < ingredients.length; i++) {
     //console.log(ingredients[i].name)
     if (!ingNames.includes(ingredients[i].name)) {
       ingArray.push(ingredients[i])
     }
     ingNames.push(ingredients[i].name)
-    
+
   }
 
   const count = 0
@@ -130,13 +118,13 @@ router.post('/drinks', async function (req, res, next) {
 
   let ingArray = []
   let ingNames = []
-  for (let i =0; i<ingredients.length; i++) {
+  for (let i = 0; i < ingredients.length; i++) {
     //console.log(ingredients[i].name)
     if (!ingNames.includes(ingredients[i].name)) {
       ingArray.push(ingredients[i])
     }
     ingNames.push(ingredients[i].name)
-    
+
   }
 
   //const ingredientList = req.body.ingredientList
@@ -145,42 +133,44 @@ router.post('/drinks', async function (req, res, next) {
   let bevs = []
   let ingList = req.body.ingredient
   let isExist = false
+
   if (ingList) {
-    if (Array.isArray(ingList)) {
-      //console.log("LIST", ingList)
-      //console.log("INDEX", ingList[0])
-
-      for (let i = 0; i < ingList.length; i++) {
-        isExist = false
-        const ing = await Ingredient.findOne({
-          where: {
-            name: ingList[i]
-          }
-        });
-        console.log("TESTINGSSSSS")
-        console.log(ing.id)
-        const bev = await BevIng.findOne({
-          where: {
-            ing_id: ing.id
-          }
-        });
-        console.log(bev)
-        const newDrink = await Beverage.findByPk(bev.bev_id)
-
-        for (let i = 0; i < bevs.length; i++) {
-          if (bevs[i].id == newDrink.id) {
-            isExist = true
-          }
-
-        }
-        if (!isExist) {
-          bevs.push(newDrink)
-        }
-      }
-
-      console.log(bevs)
-      res.render('drinks', { drinks: bevs, currentUser: currentUser, ingredients: ingArray, drinkType: drinkType, ingredList: ingredList, count: count });
+    if (!Array.isArray(ingList)) {
+      ingList = [req.body.ingredient]
     }
+
+    for (let i = 0; i < ingList.length; i++) {
+      isExist = false
+      const ing = await Ingredient.findOne({
+        where: {
+          name: ingList[i]
+        }
+      });
+      console.log("TESTINGSSSSS")
+      console.log(ing.id)
+      
+      const bev = await BevIng.findOne({
+        where: {
+          ing_id: ing.id
+        }
+      });
+      
+      const newDrink = await Beverage.findByPk(bev.bev_id)
+
+      // Contains
+      for (let i = 0; i < bevs.length; i++) {
+        if (bevs[i].id == newDrink.id) {
+          isExist = true
+        }
+
+      }
+      if (!isExist) {
+        bevs.push(newDrink)
+      }
+    }
+
+    console.log(bevs)
+    res.render('drinks', { drinks: bevs, currentUser: currentUser, ingredients: ingArray, drinkType: drinkType, ingredList: ingredList, count: count });
   }
   res.render('drinks', { drinks: drinks, currentUser: currentUser, ingredients: ingArray, drinkType: drinkType, ingredList: ingredList, count: count });
 });

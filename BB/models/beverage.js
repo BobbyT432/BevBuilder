@@ -1,9 +1,6 @@
 const sequelize = require('../db')
 const { Model, DataTypes } = require('sequelize')
 
-const BevCom = require('./bevcom');
-const Comment = require('./comment');
-
 // Models
 const BevCom = require('./bevcom');
 const Comment = require('./comment');
