@@ -57,6 +57,20 @@ class Beverage extends Model {
     }
   }
 
+  static async get_comments(bevID){
+      const myCommentsID = await BevCom.findAll({
+        where: {
+          bev_id: bevID
+        }
+      })
+      let myList = []
+      for (item of myCommentsID){
+        const myComment = await Comment.findByPk(item.com_id)
+        myList.push(myComment)
+      }
+      const bevAllComments = myList
+      return bevAllComments
+  }
 }
 
 Beverage.init({

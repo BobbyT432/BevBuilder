@@ -36,7 +36,9 @@
                             <div class="tab-pane fade show active" id="pills-posted" role="tabpanel"
                                 aria-labelledby="pills-posted-tab">
                                 <div class="postedList">
+                                    <% let j = 0 %>
                                     <% for (item of myBevs) { %>
+                                        <a href="./beverage/<%= item.id %>" class="itemLinker">
                                         <div class="postedItem">
                                             <div class="row">
                                                 <div class="col-6">
@@ -49,19 +51,26 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div id="stars">
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <% for (let i=0; i < (Math.floor(item.rating)); i++) {%>
+                                                            <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                                                          <% } %>
+                                                          <% if (((item.rating * 10) % 10) != 0) { %>
+                                                            <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                                                          <% } %>
+                                                          <% for (let i=0; i < (5 - (item.rating + .99)); i++) { %>
+                                                            <i style="color: #e13859" class="fa-regular fa-star"></i>
+                                                          <% } %>
                                                         <div class="row">
-                                                            <h5>5.0 (1103)</h5>
+                                                            <h5><%= item.rating %> (<%= createdBevComs[j].length %>)</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        
 
                                         </div>
+                                    </a>
+                                        <% j++ %>
                                         <% } %>
                                 </div>
                             </div>
@@ -69,7 +78,9 @@
                             <div class="tab-pane fade" id="pills-saved" role="tabpanel"
                                 aria-labelledby="pills-saved-tab">
                                 <div class="savedList">
+                                    <% j = 0 %>
                                     <% for (item of mySaved) { %>
+                                        <a href="./beverage/<%= item.id %>" class="itemLinker">
                                         <div class="savedItem">
                                             <div class="row">
                                                 <div class="col-6">
@@ -82,26 +93,32 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div id="stars">
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                        <i style="color: #e13859" class="fa-solid fa-star"></i>
+                                                        <% for (let i=0; i < (Math.floor(item.rating)); i++) {%>
+                                                            <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                                                          <% } %>
+                                                          <% if (((item.rating * 10) % 10) != 0) { %>
+                                                            <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                                                          <% } %>
+                                                          <% for (let i=0; i < (5 - (item.rating + .99)); i++) { %>
+                                                            <i style="color: #e13859" class="fa-regular fa-star"></i>
+                                                          <% } %>
                                                         <div class="row">
-                                                            <h5>5.0 (1103)</h5>
+                                                            <h5><%= item.rating %> (<%= savedBevComs[j].length %>)</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                         </div>
+                                    </a>
+                                        <% j = j + 1 %>
                                         <% } %>
                                 </div>
                             </div>
                             <!-- COMMENTS -->
                             <div class="tab-pane fade" id="pills-comments" role="tabpanel"
                                 aria-labelledby="pills-comments-tab">
-                                <div class="comment-section">
+                                <div class="commentList">
                                     <!--Comments-->
                                     <% for (comment of myComments) { %>
                                     <div class="row" id="comment">
@@ -118,14 +135,15 @@
                                         <div class="col">
                                             <!-- for loop -->
                                             <div id="stars">
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <i style="color: #e13859" class="fa-solid fa-star"></i>
-                                                <div class="row">
-                                                    <h5>5.0 (1103)</h5>
-                                                </div>
+                                                <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
+                                                    <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                                                  <% } %>
+                                                  <% if (((comment.rating * 10) % 10) != 0) { %>
+                                                    <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                                                  <% } %>
+                                                  <% for (let i=0; i < (5 - (comment.rating + .99)); i++) { %>
+                                                    <i style="color: #e13859" class="fa-regular fa-star"></i>
+                                                  <% } %>
                                                 <!-- end loop -->
                                             </div>
                                         </div>
@@ -149,6 +167,9 @@
                         <div class="botPart">
                             <h2 class="profileBoxText">Username: <%= currentUser.username %>
                             </h2>
+                            <div class="logoutOption">
+                                <a href="/" class="logoutButton"><h3>Logout</h3></a>
+                            </div>
                         </div>
                     </div>
                 </div>

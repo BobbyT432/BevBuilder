@@ -9,6 +9,7 @@ const BevIng = require('../models/beving');
 const Comment = require('../models/comment');
 const BevCom = require('../models/bevcom');
 const UserSaveBev = require('../models/usersavebev');
+const { Op } = require("sequelize");
 
 /* Login */
 /* GET home page. */
@@ -99,8 +100,21 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
         bevComments.push(com);
       }
     }
+
+    const checkifsaved = await UserSaveBev.findOne({
+      where: {
+        bev_id: req.params.bev_id
+      }
+    })
+    let isSaved = true
+    if (checkifsaved == null){
+      isSaved = false
+    }
+
+    console.log(isSaved)
+
     const currentUser = req.session.user
-    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments, currentUser: currentUser, avgRating: avgRating});
+    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments, currentUser: currentUser, avgRating: avgRating, isSaved: isSaved});
   }
   else {
     res.redirect('/');
@@ -204,7 +218,26 @@ router.post('/save-bev/:bev_id', async function(req, res, next) {
   });
   console.log("POST SAVED");
 
-  res.redirect('/home');
+  const currentBev = req.params.bev_id
+  res.redirect('/beverage/' + currentBev);
+});
+
+router.post('/unsave-bev/:bev_id', async function(req, res, next) {
+  // ADD A MESSAGE TO INDICATE THE BEVERAGE HAS BEEN UN-SAVED
+  const getTheId = await UserSaveBev.findOne({
+    where: {
+      [Op.and]: [ {bev_id: req.params.bev_id}, {username: req.session.user.username} ]
+    }
+  })
+  await UserSaveBev.destroy({
+    where: {
+      id: getTheId.id
+    }
+  })
+  console.log("POST UN-SAVED");
+
+  const currentBev = req.params.bev_id
+  res.redirect('/beverage/' + currentBev);
 });
 
 router.get('/drinks', async function(req, res, next) {

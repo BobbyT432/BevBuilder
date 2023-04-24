@@ -10,7 +10,7 @@
         <p id="author">Mixologist: <%=beverage.author %>
         </p>
       </div>
-      <div class="col">
+      <div class="col"> 
         <div id="stars">
           <!-- lmfao -->
           <% for (let i=0; i < (Math.floor(avgRating)); i++) {%>
@@ -75,11 +75,22 @@
 
 
       </div>
-      <div class="col-sm-auto">
-        <form method="POST" action=<%="/save-bev/" + beverage.id %> >
-          <button type="submit" class="btn btn-secondary"><i class="fa-sharp fa-solid fa-folder-open"></i>Save</button>
-        </form>
-      </div>
+
+      <!-- SAVE -->
+      <% if (isSaved) { %>
+        <div class="col-sm-auto">
+          <form method="POST" action=<%="/unsave-bev/" + beverage.id %> >
+            <button type="submit" class="btn btn-secondary" style="background-color:#e13859; border-color:#e13859;"><i class="fa-solid fa-check-to-slot"></i> Saved</button>
+          </form>
+        </div>
+      <% } else {%>
+        <div class="col-sm-auto">
+          <form method="POST" action=<%="/save-bev/" + beverage.id %> >
+            <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-bookmark"></i> Save</button>
+          </form>
+        </div>
+      <% } %>
+
     </div>
     <div class="row">
       <div class="col">
