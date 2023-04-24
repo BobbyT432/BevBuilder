@@ -1,5 +1,25 @@
 var express = require('express');
+var path = require('path');
 var router = express.Router();
+
+// const multer = require('multer');
+
+
+// // Images
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'user-photos')
+//     },
+//     filename: (req, file, cb) => {
+//         console.log(file),
+//         cb(null, Date.now() + path.extname(file.originalname))
+//     }
+// });
+
+// const upload = multer({
+//     storage: storage
+// });
+
 
 // Models
 const User = require('../models/user');
@@ -19,6 +39,7 @@ const sessionChecker = (req, res, next) => {
 }
 
 router.use(sessionChecker);
+
 /**/
 
 // Global Variables (not sure if this is the best approach, we could store this in the session but that seems overkill)
@@ -34,7 +55,7 @@ router.get('/create', async function (req, res, next) {
     res.render('bev_create', { username: username, ingredList: [], currentUser: currentUser });
 });
 
-router.get('/:bev_id', async function (req, res, next) { // ###############################
+router.get('/:bev_id', async function (req, res, next) {
     let bevComments = []
     let ingred = [] // stores all ingredients that is attached to the drink
 
