@@ -1,12 +1,144 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>TYPE /beverage/id into the URL to find a specific drink in our database</p>
-  </body>
-</html>
+<%- include('header', {cssFile: "style.css", currUser: currentUser.username}) -%>
+    <!-- INTRO -->
+    <section class="introSection">
+        <h1 class="title">DRINK UP</h1> 
+    </section> 
+
+    <!-- FEATURED -->
+    <section class="featuredSection">
+        <h1 class="sectionTitle">FEATURED</h1>
+        <div class="featuredCollection">
+          <% for (item of bevFeatured) { %>
+                <!-- item -->
+                <a href="./beverage/<%= item.id %>" class="featuredItem" style="text-decoration: none;">
+                    <div class="card">
+                        <img src="images/filler.jpg" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= item.name %></h5>
+                            <!-- <h5 class="card-title">item.</h5> -->
+                            
+                            
+                            <% for (let i=0; i < (Math.floor(item.rating)); i++) {%>
+                                <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                              <% } %>
+                              <% if (((item.rating * 10) % 10) != 0) { %>
+                                <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                              <% } %>
+                              <% for (let i=0; i < (5 - (item.rating + .99)); i++) { %>
+                                <i style="color: #e13859" class="fa-regular fa-star"></i>
+                              <% } %>
+
+
+                        </div>
+                    </div>
+                </a>
+          <% } %>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="aboutSection">
+        <h1 class="sectionTitle2">OUR MISSION</h1>
+        <br>
+        <div class="row" style="padding-bottom: 60px; padding-top: 30px;">
+            <div class="col-2" style="margin-right: 64px; margin-left: 450px;">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="card" style="height: 600px; width: 450px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                           <img class="card-img" src="images/IMG-1770.JPG" alt="Bologna" style="height: 600px; width: 450px">
+                          <div class="card-img-overlay text-white d-flex flex-column justify-content-center" style="margin-top: 250px;">
+                            <h6 class="card-subtitle mb-2" style="text-shadow: 2px 2px #0000008f; font-size: larger;">We're Here For a Good Time</h6>
+                            <br>
+                            <h6 class="card-subtitle mb-2" style="text-shadow: 1px 1px #000000;">The founders of Beverage Builder are all from a small college town that has a well known party culture. But, we are more inclined to stay home and enjoy our time with our friend group with homemade drinks. </h6>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
+
+            
+            <div class="col-3">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="card" style="height: 600px; width: 450px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                           <img class="card-img" src="images/IMG-4355.jpg" alt="Bologna" style="height: 600px; width: 600px;">
+                          <div class="card-img-overlay text-white d-flex flex-column justify-content-center" style="margin-top: 250px;">
+                            <h6 class="card-subtitle mb-2" style="text-shadow: 2px 2px #0000008f; font-size: larger;">Responsibility is Key</h6>
+                            <br>
+                            <h6 class="card-subtitle mb-2" style="text-shadow: 1px 1px #000000;">One thing a lot of college age mixologists get wrong is safety. Our company promotes legal and ethical consumption of appropriate beverages, and discourages any forms of hazing or substance abuse. Stay safe, have fun!</h6> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
+
+            
+            <div class="col-2">
+                <div class="container">
+                    <div class="row">
+                      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                        <div class="card" style="height: 600px; width: 450px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                           <img class="card-img" src="images/IMG-1771 (1).JPG" alt="Bologna" style="height: 600px; width: 450px">
+                          <div class="card-img-overlay text-white d-flex flex-column justify-content-center" style="margin-top: 250px;">
+                            <h6 class="card-subtitle mb-2" style="text-shadow: 2px 2px #0000008f; font-size: larger;">Sharing Meaningful Experiences</h6>
+                            <br>
+                            <h6 class="card-subtitle mb-2" style="text-shadow: 1px 1px #000000;">Although we do prefer a more relaxed environment, it has been a fun growing experience for all of us to explore new bars and pubs. Learning about cocktails also makes this much more enriching! </h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WEB TO DO -->
+    <section class="todoSection">
+        <h1 class="sectionTitle2">MERCH</h1>
+        <br>
+        <div class="row" style="text-align: center; margin-bottom: 100px; padding-top: 100px;">
+            <div class="col-3" style="text-align: center; margin-left: 550px; margin-top: 180px;">
+                <h1 class="sectionTitle2">Beverage Builder Caps</h1>
+                <p class="aboutText2" style="margin-top: 20px;">Sleek, elegant, modern cap brandished with our minimalist logo. Grab a hat that expresses your exquisite taste.</p>
+            </div>
+            <div class="col-3" style="text-align: center; margin-left: 140px;">
+                <div id="imageContainer" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img src="images/hatMerch.png" style="width: 650px">
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="text-align: center; margin-bottom: 100px;">
+            <div class="col-3" style="text-align: center; margin-left: 550px;">
+                <div id="imageContainer" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img src="images/sweaterMerch.png" style="width: 650px">
+                </div>
+            </div>
+            <div class="col-3" style="text-align: center; margin-left: 140px; margin-top: 180px;">
+                <h1 class="sectionTitle2">Crewneck Sweaters</h1>
+                <p class="aboutText2" style="margin-top: 20px;">Get ready to get comfy. Our sweaters will bring introverts and extroverts together as they're' perfect for either a day at home and/or a night out. </p>
+            </div>
+        </div>
+
+        <div class="row" style="text-align: center; margin-bottom: 100px;">
+            <div class="col-3" style="text-align: center; margin-left: 550px; margin-top: 180px;">
+                <h1 class="sectionTitle2">Beverage Builder Patch</h1>
+                <p class="aboutText2" style="margin-top: 20px;">Do you like to collect stickers or patches? The Beverage Builder Patch can adorn your backpack, laptop case, and much more.</p>
+            </div>
+            <div class="col-3" style="text-align: center; margin-left: 140px;">
+                <div id="imageContainer" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img src="images/patchMerch.png" style="width: 650px">
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+<%- include('footer') -%>
