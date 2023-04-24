@@ -38,6 +38,12 @@ body{
     color: #342b26 !important;
 }
 
+html {
+
+  scroll-behavior: auto !important;
+
+}
+
 /* Nav Bar */
 .topNavBar{
     background-color: white;
@@ -175,6 +181,18 @@ body{
     padding-top: 30px;
 }
 
+.ingredArea{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: auto;
+  overflow-x: hidden;
+  height: 460px;
+}
+
+.ingredList{
+  list-style-type: none;
+}
+
 #ingred-photo{
     background-color: #33bc9d;
     margin: auto;
@@ -223,6 +241,33 @@ body{
 
 .container::-webkit-scrollbar{
   display: none;
+}
+
+#sharebutton{
+  background-color: var(--clr-accent);
+  border: none;
+}
+
+#sharebutton:hover{
+  background-color: #2da387;
+}
+
+#saveButton{
+  border: none;
+  background-color: var(--clr-second);
+}
+
+#saveButton:hover{
+  background-color: #1d1714;
+}
+
+#savedButton{
+  border: none;
+  background-color: var(--clr-primary);
+}
+
+#savedButton:hover{
+  background-color: #c0314e;
 }
 
 

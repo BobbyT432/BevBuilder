@@ -10,65 +10,65 @@
         <p id="author">Mixologist: <%=beverage.author %>
         </p>
       </div>
-      <div class="col"> 
+      <div class="col">
         <div id="stars">
           <!-- lmfao -->
           <% for (let i=0; i < (Math.floor(avgRating)); i++) {%>
-            <i style="color: #e13859" class="fa-solid fa-star"></i> 
-          <% } %>
-          <% if (((avgRating * 10) % 10) != 0) { %>
-            <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
-          <% } %>
-          <% for (let i=0; i < (5 - (avgRating + .99)); i++) { %>
-            <i style="color: #e13859" class="fa-regular fa-star"></i>
-          <% } %>
-      
-          <div class="row">
-            <h5><%= avgRating %> (<%= comments.length %>)</h5>
-          </div>
+            <i style="color: #e13859" class="fa-solid fa-star"></i>
+            <% } %>
+              <% if (((avgRating * 10) % 10) !=0) { %>
+                <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                <% } %>
+                  <% for (let i=0; i < (5 - (avgRating + .99)); i++) { %>
+                    <i style="color: #e13859" class="fa-regular fa-star"></i>
+                    <% } %>
+
+                      <div class="row">
+                        <h5>
+                          <%= avgRating %> (<%= comments.length %>)
+                        </h5>
+                      </div>
         </div>
       </div>
     </div>
     <div class="row" id="header-btn">
-      <div class="col-sm-auto">
-        <p id="btn"><i class="fa-solid fa-heart"></i> Like</p>
-      </div>
       <div class="col-sm-auto">
         <!-- <p id="btn"><i class="fa-solid fa-share"></i> Share</p> -->
         <!-- <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-share"></i>Share</button> -->
 
 
 
-           <!-- Share button -->
-        <button type="button" style="margin-left: 20px; background-color: #5F7394; border: 0px" class="btn btn-primary"
-        data-bs-toggle="modal" data-bs-target="#shareModal">
-        <i class="fa-solid fa-share"></i> Share
-      </button>
-      
-      <!-- Modal -->
-      <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="shareModalLabel">Share The Taste</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- Share button -->
+        <button type="button" style="margin-bottom: 10px; border: none" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#shareModal" id="sharebutton">
+          <i class="fa-solid fa-share"></i> Share
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="shareModalLabel">Share The Taste</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <form method="POST" action=<%="/post-comment/" + beverage.id %> >
+                <div class="modal-body">
+                  <!-- Add a comment section -->
+                  <label for="drinkDesc" class="form-label">Link</label>
+                  <input type="text" class="form-control" id="linktext" name="linktext"
+                    value="beverage/<%=beverage.id%>" readonly>
+                  <!---->
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <!--<button type="submit" style="background-color: #5F7394;" class="btn btn-primary"><i class="fa-solid fa-copy"></i></button>-->
+                </div>
+              </form>
             </div>
-            <form method="POST" action=<%="/post-comment/" + beverage.id %> >
-              <div class="modal-body">
-                <!-- Add a comment section -->
-                <label for="drinkDesc" class="form-label">Link</label>
-                <input type="text" class="form-control" id="linktext" name="linktext" value="beverage/<%=beverage.id%>" readonly>
-                <!---->
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!--<button type="submit" style="background-color: #5F7394;" class="btn btn-primary"><i class="fa-solid fa-copy"></i></button>-->
-              </div>
-            </form>
           </div>
         </div>
-      </div>
-      <!---->
+        <!---->
 
 
 
@@ -80,16 +80,18 @@
       <% if (isSaved) { %>
         <div class="col-sm-auto">
           <form method="POST" action=<%="/unsave-bev/" + beverage.id %> >
-            <button type="submit" class="btn btn-secondary" style="background-color:#e13859; border-color:#e13859;"><i class="fa-solid fa-check-to-slot"></i> Saved</button>
+            <button type="submit" class="btn btn-secondary" id="savedButton"><i class="fa-solid fa-check-to-slot"></i>
+              Saved</button>
           </form>
         </div>
-      <% } else {%>
-        <div class="col-sm-auto">
-          <form method="POST" action=<%="/save-bev/" + beverage.id %> >
-            <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-bookmark"></i> Save</button>
-          </form>
-        </div>
-      <% } %>
+        <% } else {%>
+          <div class="col-sm-auto">
+            <form method="POST" action=<%="/save-bev/" + beverage.id %> >
+              <button type="submit" class="btn btn-secondary" id="saveButton"><i class="fa-solid fa-bookmark"></i>
+                Save</button>
+            </form>
+          </div>
+          <% } %>
 
     </div>
     <div class="row">
@@ -130,15 +132,18 @@
     </div>
     <div class="row">
       <div id="ingred-photo">
-        <ul>
-          <% for (ingred of ingreds) { %>
-            <li>
-              <p>
-                <%=ingred%>
-              </p>
-            </li>
-            <% } %>
-        </ul>
+        <div class="ingredArea">
+          <ul class="ingredList">
+            <% for (ingred of ingreds) { %>
+              <li>
+                <h3>
+                  <i class="fa-solid fa-minus"></i>
+                  <%=ingred%>
+                </h3>
+              </li>
+              <% } %>
+          </ul>
+        </div>
       </div>
     </div>
 
@@ -195,15 +200,15 @@
             </div>
           </div>
           <div class="col">
-                <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
-                  <i style="color: #e13859" class="fa-solid fa-star"></i> 
-                <% } %>
-                <% if (((comment.rating * 10) % 10) != 0) { %>
+            <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
+              <i style="color: #e13859" class="fa-solid fa-star"></i>
+              <% } %>
+                <% if (((comment.rating * 10) % 10) !=0) { %>
                   <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
-                <% } %>
-                <% for (let i=0; i < (5 - (comment.rating + .99)); i++) { %>
-                  <i style="color: #e13859" class="fa-regular fa-star"></i>
-                <% } %>
+                  <% } %>
+                    <% for (let i=0; i < (5 - (comment.rating + .99)); i++) { %>
+                      <i style="color: #e13859" class="fa-regular fa-star"></i>
+                      <% } %>
           </div>
           <div class="row">
             <p id="comment-text">

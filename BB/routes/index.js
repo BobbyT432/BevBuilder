@@ -206,7 +206,7 @@ router.post('/post-comment/:bev_id', async function(req, res, next) {
     });
 
     const currentBev = req.params.bev_id
-    res.redirect('/beverage/' + currentBev);
+    res.redirect('/beverage/' + currentBev + '#comment-header');
 });
 
 router.post('/save-bev/:bev_id', async function(req, res, next) {
