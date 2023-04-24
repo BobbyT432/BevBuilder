@@ -18,7 +18,7 @@ Comment.init({
       allowNull: false
     },
     rating: {
-      type: DataTypes.FLOAT,
+      type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0,
       validate: {
