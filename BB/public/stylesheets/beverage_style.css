@@ -217,8 +217,12 @@ body{
 .comment-section{
     height: 350px;
     /* background-color: #33bc9d; */
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
+}
+
+.container::-webkit-scrollbar{
+  display: none;
 }
 
 

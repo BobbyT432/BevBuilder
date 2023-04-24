@@ -155,11 +155,20 @@ a {
     float: right;
 }
 
+.itemLinker{
+    text-decoration: none;
+    color: var(--clr-second);
+}
+
+.itemLinker:hover{
+    color: var(--clr-primary);
+}
+
 /* POSTED */
 .postedList{
     margin: 20px;
     height: 910px;
-    overflow: scroll;
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -178,7 +187,8 @@ a {
 /* SAVED */
 .savedList{
     margin: 20px;
-    overflow: scroll;
+    height: 910px;
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -212,10 +222,11 @@ a {
     margin-bottom: 20px;
 }
 
-.comment-section{
+.commentList{
     /* background-color: #33bc9d; */
     margin: 20px;
-    overflow: scroll;
+    height: 910px;
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -246,6 +257,21 @@ a {
     border-radius: 0 0 var(--corners) var(--corners);
 }
 
+.logoutOption{
+    margin-top: 20px;
+    float: right;
+    transform: translateY(50px);
+    margin-right: 20px;
+}
+
+.logoutButton{
+    text-decoration: none;
+    color: var(--clr-primary);
+}
+
+.logoutButton:hover{
+    color: var(--clr-second);
+}
 
 /* FOOTER */
 #footer {
