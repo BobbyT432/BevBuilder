@@ -4,6 +4,10 @@ const { Model, DataTypes } = require('sequelize')
 const BevCom = require('./bevcom');
 const Comment = require('./comment');
 
+// Models
+const BevCom = require('./bevcom');
+const Comment = require('./comment');
+
 class Beverage extends Model {
   static async find_bev(bevID){
     try {
@@ -20,28 +24,6 @@ class Beverage extends Model {
         return null;
     }
   }
-
-  // static async findBevsByAuthor(bevAuthor){
-  //   try {
-  //     if (Beverage.findOne({
-  //       where: {author: bevAuthor}
-  //     }) != null){
-  //       const bevs = Beverage.findAll({
-  //         where: {author: bevAuthor}
-  //       })
-  //       console.log("MY BEVS HERE")
-  //       console.log(bevs)
-  //       return bevs
-  //     } else{
-  //       console.log("NONE HERE")
-  //       return []
-  //     }
-
-  //   } catch (error) {
-  //     console.log(error)
-  //     return null;
-  //   }
-  // }
 
   static async get_avg(bevID){
     try {
@@ -68,6 +50,7 @@ class Beverage extends Model {
         }
         return ((sum === 0) ? sum : sum / bevComments.length);
         }
+
         else {
             return null;
         }
@@ -76,6 +59,7 @@ class Beverage extends Model {
         return null;
     }
   }
+
 }
 
 Beverage.init({

@@ -6,56 +6,40 @@
 
     <div id="searchbar" class="row">
         <div class="row">
-            <div class="container" style="margin-top: 14px; background-color: white; padding-bottom: 30px;">
-                <div class="row height d-flex justify-content-center align-items-center">
-                    <div class="col-md-8">
+            <div class="container" style="background-color: white; padding-bottom: 30px; padding-top: 30px;">
 
-                        <div class="search">
-                            <i class="fa fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Browse our Cocktails">
-                            <button class="btn btn-primary">Search</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="row" style="text-align: center; justify-content: center;">
-                    <div class="col-2">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                By: Drink Type
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Tequila</a></li>
-                                <li><a class="dropdown-item" href="#">Vodka</a></li>
-                                <li><a class="dropdown-item" href="#">Rum</a></li>
-                                <li><a class="dropdown-item" href="#">Gin</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-expanded="false" data-bs-auto-close="outside">
-                                By: Ingredients
-                            </button>
-                            <form class="dropdown-menu p-4">
-                                <% for (ingredient of ingredients) { %>
-                                <div class="mb-3">
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                                        <label class="form-check-label" for="dropdownCheck2">
-                                            <%= ingredient.name %>
-                                        </label>
-                                    </div>
+                <form method="post" action="/drinks">
+                    <div class="row" style="text-align: center; justify-content: center;">
+                        <div class="col-1">
+                            <div class="dropdown" name="ingredientList">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                                    aria-expanded="false" data-bs-auto-close="outside" style="width: 200px">
+                                    Filter By: Ingredients
+                                </button>
+                                <div class="dropdown-menu p-4" method="post">
+                                    <% for (ingredient of ingredients) { %>
+                                        <% count += 1 %>
+                                        <div class="mb-3">
+                                            <div class="form-check">
+                                                <!--<input type="checkbox" class="form-check-input" id="dropdownCheck2" name=<%="ingredient" + count %>-->
+                                                <input type="checkbox" class="form-check-input" id="dropdownCheck2" name="ingredient" value="<%= ingredient.name %>">
+                                                <label class="form-check-label" for="dropdownCheck2">
+                                                    <%= ingredient.name %>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <% } %>
+
+                                            <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
                                 </div>
-                                <% } %>
-                                <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
-                            </form>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="col-1">
+                            <button class="w-80 btn btn-primary btn-md" type="submit" style="width: 200px">Refresh</button>
+                        </div>
 
+                    </div>
+                </form>
             </div>
         </div>
         <div>
@@ -67,7 +51,7 @@
                 <div class="featuredCollection">
                     <% for (drink of drinks) { %>
                         <!-- item 1 -->
-                        <a href="" class="featuredItem" style="text-decoration: none;">
+                        <a href="./beverage/<%= drink.id %>" class="featuredItem" style="text-decoration: none;">
                             <div class="card">
                                 <img src="images/great-cocktails-9PyQwwmZxpI-unsplash.jpg" alt="Avatar"
                                     style="width:400px; height: auto; transform: translate3d(-1px,-1px,0)">

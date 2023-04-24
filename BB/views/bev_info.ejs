@@ -23,7 +23,32 @@
             <i style="color: #e13859" class="fa-regular fa-star"></i>
           <% } %>
       
+<%- include('header', {cssFile: "beverage_style.css" , currUser: currentUser.username}) -%>
+
+  <div class="content">
+    <div class="row" id="drink-header">
+      <div class="col">
+        <p id="drink-name">
+          <%= beverage.name %>
+        </p>
+        <p id="author">Mixologist: <%=beverage.author %>
+        </p>
+      </div>
+      <div class="col">
+        <div id="stars">
+          <!-- lmfao -->
+          <% for (let i=0; i < (Math.floor(avgRating)); i++) {%>
+            <i style="color: #e13859" class="fa-solid fa-star"></i> 
+          <% } %>
+          <% if (((avgRating * 10) % 10) != 0) { %>
+            <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+          <% } %>
+          <% for (let i=0; i < (5 - (avgRating + .99)); i++) { %>
+            <i style="color: #e13859" class="fa-regular fa-star"></i>
+          <% } %>
+      
           <div class="row">
+            <h5><%= avgRating %> (<%= comments.length %>)</h5>
             <h5><%= avgRating %> (<%= comments.length %>)</h5>
           </div>
         </div>
@@ -180,6 +205,37 @@
                 <%= comment.username %>
               </h3>
             </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+
+    <div class="comment-section">
+      <!--Comments-->
+      <% for (comment of comments) { %>
+        <div class="row" id="comment">
+          <div class="col">
+            <div>
+              <h3>
+                <%= comment.username %>
+              </h3>
+            </div>
+          </div>
+          <div class="col">
+                <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
+                  <i style="color: #e13859" class="fa-solid fa-star"></i> 
+                <% } %>
+                <% if (((comment.rating * 10) % 10) != 0) { %>
+                  <i style="color: #e13859" class="fa-solid fa-star-half-stroke"></i>
+                <% } %>
+                <% for (let i=0; i < (5 - (comment.rating + .99)); i++) { %>
+                  <i style="color: #e13859" class="fa-regular fa-star"></i>
+                <% } %>
+          </div>
+          <div class="row">
+            <p id="comment-text">
+              <%= comment.text %>
+            </p>
           </div>
           <div class="col">
                 <% for (let i=0; i < (Math.floor(comment.rating)); i++) {%>
@@ -198,6 +254,8 @@
             </p>
           </div>
         </div>
+        <% } %>
+          <!---->
         <% } %>
           <!---->
     </div>
