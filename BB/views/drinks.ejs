@@ -18,24 +18,26 @@
                                 </button>
                                 <div class="dropdown-menu p-4" method="post">
                                     <% for (ingredient of ingredients) { %>
-                                        <% count += 1 %>
-                                        <div class="mb-3">
-                                            <div class="form-check">
-                                                <!--<input type="checkbox" class="form-check-input" id="dropdownCheck2" name=<%="ingredient" + count %>-->
-                                                <input type="checkbox" class="form-check-input" id="dropdownCheck2" name="ingredient" value="<%= ingredient.name %>">
-                                                <label class="form-check-label" for="dropdownCheck2">
-                                                    <%= ingredient.name %>
-                                                </label>
+                                        <% count +=1 %>
+                                            <div class="mb-3">
+                                                <div class="form-check">
+                                                    <!--<input type="checkbox" class="form-check-input" id="dropdownCheck2" name=<%="ingredient" + count %>-->
+                                                    <input type="checkbox" class="form-check-input" id="dropdownCheck2"
+                                                        name="ingredient" value="<%= ingredient.name %>">
+                                                    <label class="form-check-label" for="dropdownCheck2">
+                                                        <%= ingredient.name %>
+                                                    </label>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <% } %>
+                                            <% } %>
 
-                                            <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
+                                                <!--<button type="submit" class="btn btn-primary">Sign in</button>-->
                                 </div>
                             </div>
                         </div>
                         <div class="col-1">
-                            <button class="w-80 btn btn-primary btn-md" type="submit" style="width: 200px">Refresh</button>
+                            <button class="w-80 btn btn-primary btn-md" type="submit"
+                                style="width: 200px">Refresh</button>
                         </div>
 
                     </div>
@@ -51,12 +53,16 @@
                 <div class="featuredCollection">
                     <% for (drink of drinks) { %>
                         <!-- item 1 -->
-                        <a href="./beverage/<%= drink.id %>" class="featuredItem" style="text-decoration: none;">
+                        
                             <div class="card">
+                                <a href="./beverage/<%= drink.id %>" class="featuredItem" style="text-decoration: none;">
                                 <img src="images/great-cocktails-9PyQwwmZxpI-unsplash.jpg" alt="Avatar"
                                     style="width:400px; height: auto; transform: translate3d(-1px,-1px,0)">
+                                </a>
                                 <div class="container">
-                                    <h5 class="card-type"><%= drink.description %></h5>
+                                    <h5 class="card-type">
+                                        <%= drink.description %>
+                                    </h5>
                                     <p class="card-title"><b>
                                             <%= drink.name %>
                                         </b></p>
@@ -70,10 +76,17 @@
                                                     <% for (let i=0; i < (5 - (drink.rating + .99)); i++) { %>
                                                         <i style="color: #e13859" class="fa-regular fa-star"></i>
                                                         <% } %>
+                                                            <% if (currentUser.username=='Admin' ) { %>
+                                                                <form method="POST" action=<%="/beverage/delete-drink/"
+                                                                    + drink.id %> >
+                                                                    <button type="submit" class="btn btn-secondary"
+                                                                        style="float: right;">Remove</button>
+                                                                </form>
+                                                                <% } %>
 
                                 </div>
                             </div>
-                        </a>
+                        
                         <% } %>
 
                 </div>

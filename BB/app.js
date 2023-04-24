@@ -67,15 +67,16 @@ app.use(function (err, req, res, next) {
 });
 
 async function test_setup() {
-  const sampleAcc = await User.create({ username: "Admin", password: "1234" });
-  const sampleAcc2 = await User.create({ username: "Bawb", password: "1234" });
-  const sampleAcc3 = await User.create({ username: "asdf", password: "asdf" });
-  const sampleBev = await Beverage.create({ name: "Lemonade", author: "BeerBelly10024", description: "A delicious refreshment!", instr: "Step 1: " });
-  const sampleIng = await Ingredient.create({ name: "Lemon" });
-  const sampleBevIng = await BevIng.create({ bev_id: sampleBev.id, ing_id: sampleIng.id, amount: 2 });
+  // const sampleAcc = await User.create({ username: "Admin", password: "1234" });
+  // const sampleAcc2 = await User.create({ username: "Bawb", password: "1234" });
+  // const sampleAcc3 = await User.create({ username: "asdf", password: "asdf" });
+  // const sampleBev = await Beverage.create({ name: "Lemonade", author: "BeerBelly10024", description: "A delicious refreshment!", instr: "Step 1: " });
+  // const sampleIng = await Ingredient.create({ name: "Lemon" });
+  // const sampleBevIng = await BevIng.create({ bev_id: sampleBev.id, ing_id: sampleIng.id, amount: 2 });
 }
 
-sequelize.sync({ force: true }).then(() => { // this is destructive we need to do this: https://sequelize.org/docs/v6/core-concepts/model-basics/ under "Synchronization in production"
+
+sequelize.sync({  }).then(() => { // this is destructive we need to do this: https://sequelize.org/docs/v6/core-concepts/model-basics/ under "Synchronization in production"
   test_setup().then(() => console.log("Sample data created"))
 })
 

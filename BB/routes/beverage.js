@@ -45,8 +45,6 @@ router.use(sessionChecker);
 
 // Global Variables (not sure if this is the best approach, we could store this in the session but that seems overkill)
 let ingredList = []
-
-// Not sure if this should be in separate file
 // split up our router into CRUD format
 
 router.get('/create', async function (req, res, next) {
@@ -64,7 +62,6 @@ router.get('/:bev_id', async function (req, res, next) {
     const bev = await Beverage.find_bev(req.params.bev_id)
     if (bev) {
         const avgRating = await Beverage.get_avg(bev.id);
-        
         // Update ratings (this is to show the ratings externally on other pages)
         bev.rating = avgRating
         bev.save()
@@ -80,7 +77,6 @@ router.get('/:bev_id', async function (req, res, next) {
                 ingred.push([newIngredID.name, bevIng[i].amount]) // push all the ingredients found
             }
         }
-
         // Find comments
         const comments = await BevCom.findAll({
             where: {
@@ -221,4 +217,18 @@ router.post('/unsave-bev/:bev_id', async function(req, res, next) {
     res.redirect('/beverage/' + currentBev);
   });
 
+//delete drink (only admin)
+router.post('/delete-drink/:bev_id', async function (req, res, next) {
+    let bev = req.params.bev_id;
+    console.log("DELETED")
+
+    await Beverage.deleteBeverage(bev);
+    await Beverage.destroy({
+        where: {
+          id: bev
+        }
+      })
+    res.redirect('/drinks');
+});
+  
 module.exports = router;

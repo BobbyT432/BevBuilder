@@ -4,8 +4,11 @@ const { Model, DataTypes } = require('sequelize')
 // Models
 const BevCom = require('./bevcom');
 const Comment = require('./comment');
+const Usersavebev = require('./usersavebev');
+const BevIng = require('./beving');
 
 class Beverage extends Model {
+  /* Helper Functions */
   static async find_bev(bevID) {
     try {
       const bev = await Beverage.findByPk(bevID)
@@ -45,7 +48,7 @@ class Beverage extends Model {
         for (let i = 0; i < bevComments.length; i++) {
           sum += bevComments[i].rating;
         }
-        return ((sum === 0) ? sum : (sum / bevComments.length)).toFixed(2);
+        return ((sum === 0) ? sum : (sum / bevComments.length));
       }
 
       else {
@@ -75,6 +78,37 @@ class Beverage extends Model {
     const bevAllComments = myList
     return bevAllComments
   }
+
+  static async deleteBeverage(bevID) {
+    //delete saved
+    const savedBevs = await Usersavebev.findAll({
+      where: {
+        bev_id: bevID
+      }
+    })
+    for (let toDelete of savedBevs){
+      Usersavebev.destroy({
+        where: {
+          id: toDelete.id
+        }
+      })
+    }
+
+    //delete ingred
+    const ingBevs = await BevIng.findAll({
+      where: {
+        bev_id: bevID
+      }
+    })
+    for (let toDelete of ingBevs){
+      BevIng.destroy({
+        where: {
+          id: toDelete.id
+        }
+      })
+  }
+}
+
 }
 
 Beverage.init({
@@ -83,7 +117,7 @@ Beverage.init({
     primaryKey: true,
     autoIncrement: true
   },
-  author: { // *****************THIS WILL CHANGE, IT MUST BE BY THE USER ID, NOT NAME*****************
+  author: {
     type: DataTypes.STRING,
     allowNull: false
   },
@@ -102,18 +136,11 @@ Beverage.init({
   image: {
     type: DataTypes.STRING,
   },
-  // Rating: { // TEST
-  //   type: DataTypes.INTEGER,
-  //   allowNull: true,
-  //   defaultValue: 0
-  // }
   rating: { // TEST
     type: DataTypes.INTEGER,
     allowNull: true,
     defaultValue: 0,
     set(value) {
-      // Storing passwords in plaintext in the database is terrible.
-      // Hashing the value with an appropriate cryptographic hash function is better.
       this.setDataValue('rating', value);
     }
   }
