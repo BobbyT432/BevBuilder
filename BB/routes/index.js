@@ -9,6 +9,7 @@ const BevIng = require('../models/beving');
 const Comment = require('../models/comment');
 const BevCom = require('../models/bevcom');
 const UserSaveBev = require('../models/usersavebev');
+const { Op } = require("sequelize");
 
 /* Login */
 /* GET home page. */
@@ -74,7 +75,6 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
     // Update ratings (this is to show the ratings externally on other pages)
     bev.rating = avgRating
     bev.save()
-    console.log("Rating :", avgRating)
 
     const bevIng = await BevIng.findAll({ // find the relationship between ingredients and this specific beverage
       where: {
@@ -84,7 +84,7 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
     if (bevIng){
       for (let i = 0; i < bevIng.length; i++){
         const newIngredID = await Ingredient.findByPk(bevIng[i].ing_id)
-        ingred.push([newIngredID.name, bevIng[i].amount]) // push all the ingredients found
+        ingred.push(newIngredID.name) // push all the ingredients found
       }
     }
 
@@ -100,12 +100,35 @@ router.get('/beverage/:bev_id', async function(req, res, next) {
         bevComments.push(com);
       }
     }
+
+    const checkifsaved = await UserSaveBev.findOne({
+      where: {
+        bev_id: req.params.bev_id
+      }
+    })
+    let isSaved = true
+    if (checkifsaved == null){
+      isSaved = false
+    }
+
+    console.log(isSaved)
+
     const currentUser = req.session.user
-    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments, currentUser: currentUser, avgRating: avgRating});
+    res.render('bev_info', { beverage: bev, ingreds: ingred , comments: bevComments, currentUser: currentUser, avgRating: avgRating, isSaved: isSaved});
   }
   else {
     res.redirect('/');
   }
+  
+});
+router.post('/beverage/:bev_id', function(req, res, next) {
+  res.render('bev_info', { title: 'Express' });
+});
+router.put('/beverage/:bev_id', function(req, res, next) {
+  res.render('bev_info', { title: 'Express' });
+});
+router.delete('/beverage/:bev_id', function(req, res, next) {
+  res.render('bev_info', { title: 'Express' });
 });
 
 
@@ -131,7 +154,7 @@ router.post('/create', async function(req, res, next) {
   for (let i = 0; i < ingredList.length; i++){
     const ingred = await Ingredient.create(
       {
-        name: ingredList[i][0]
+        name: ingredList[i]
       });
     
     // Each ingredient needs to be tied to the beverage with the BevIng table
@@ -139,7 +162,7 @@ router.post('/create', async function(req, res, next) {
       {
         bev_id: Bev.id,
         ing_id: ingred.id,
-        amount: ingredList[i][1]
+        amount: 1
       });
   }
 
@@ -150,8 +173,7 @@ router.post('/create', async function(req, res, next) {
 router.post('/add-ingred', async function(req, res, next) {
   let username = req.session.user.username;
   let newIngred = req.body.ingred;
-  let ingredAmt = req.body.ingredAmt;
-  ingredList.push([newIngred, ingredAmt]);
+  ingredList.push(newIngred);
   const currentUser = req.session.user
   res.render('bev_create', {username: username, ingredList: ingredList, currentUser: currentUser});
 });
@@ -160,15 +182,7 @@ router.post('/add-ingred', async function(req, res, next) {
 router.post('/delete-ingred/:ingred_name', async function(req, res, next) {
   let username = req.session.user.username;
   let ingred = req.params.ingred_name;
-  /* Find index of ingredient and remove */
-  let index = 0;
-  for (let i = 0; i < ingredList.length; i++) {
-    if (ingredList[i][0] == ingred) {
-      index = i;
-    }
-  }
-  ingredList.splice(index, 1);
-  /**/
+  ingredList.splice(ingredList.indexOf(ingred), 1);
   const currentUser = req.session.user
   res.render('bev_create', {username: username, ingredList: ingredList, currentUser: currentUser});
 });
@@ -204,7 +218,27 @@ router.post('/save-bev/:bev_id', async function(req, res, next) {
   });
   console.log("POST SAVED");
 
-  res.redirect('/home');
+  const currentBev = req.params.bev_id
+  res.redirect('/beverage/' + currentBev);
+});
+
+router.post('/unsave-bev/:bev_id', async function(req, res, next) {
+  // ADD A MESSAGE TO INDICATE THE BEVERAGE HAS BEEN UN-SAVED
+  const getTheId = await UserSaveBev.findOne({
+    where: {
+      [Op.and]: [ {bev_id: req.params.bev_id}, {username: req.session.user.username} ]
+    }
+  })
+  console.log(getTheId.id)
+  await UserSaveBev.destroy({
+    where: {
+      id: getTheId.id
+    }
+  })
+  console.log("POST UN-SAVED");
+
+  const currentBev = req.params.bev_id
+  res.redirect('/beverage/' + currentBev);
 });
 
 router.get('/drinks', async function(req, res, next) {

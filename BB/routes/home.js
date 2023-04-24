@@ -6,6 +6,7 @@ const User = require('../models/user');
 const Beverage = require('../models/beverage');
 const Ingredient = require('../models/ingredient');
 const BevIng = require('../models/beving');
+const { Op } = require("sequelize");
 
 const sessionChecker = (req, res, next)=> {
     if(req.session.user) {
@@ -22,9 +23,18 @@ router.get('/', async function(req, res, next) {
     console.log(req.session.user)
    // res.render('index', { title: 'Express' });
 
-    const bevFeatured = await Beverage.findAll()
+    const bevFeatured = await Beverage.findAll({
+      where: {
+        rating: {
+          [Op.gte]: 4
+        }
+      }
+    })
+
     const currentUser = req.session.user
     res.render('index', { bevFeatured: bevFeatured, currentUser: currentUser });
 });
+
+
   
 module.exports = router;

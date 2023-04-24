@@ -1,6 +1,7 @@
 const sequelize = require('../db')
 const { Model, DataTypes } = require('sequelize')
 
+// Models
 const BevCom = require('./bevcom');
 const Comment = require('./comment');
 
@@ -20,28 +21,6 @@ class Beverage extends Model {
         return null;
     }
   }
-
-  // static async findBevsByAuthor(bevAuthor){
-  //   try {
-  //     if (Beverage.findOne({
-  //       where: {author: bevAuthor}
-  //     }) != null){
-  //       const bevs = Beverage.findAll({
-  //         where: {author: bevAuthor}
-  //       })
-  //       console.log("MY BEVS HERE")
-  //       console.log(bevs)
-  //       return bevs
-  //     } else{
-  //       console.log("NONE HERE")
-  //       return []
-  //     }
-
-  //   } catch (error) {
-  //     console.log(error)
-  //     return null;
-  //   }
-  // }
 
   static async get_avg(bevID){
     try {
@@ -68,6 +47,7 @@ class Beverage extends Model {
         }
         return ((sum === 0) ? sum : sum / bevComments.length);
         }
+
         else {
             return null;
         }
@@ -75,6 +55,21 @@ class Beverage extends Model {
         console.log(error)
         return null;
     }
+  }
+
+  static async get_comments(bevID){
+      const myCommentsID = await BevCom.findAll({
+        where: {
+          bev_id: bevID
+        }
+      })
+      let myList = []
+      for (item of myCommentsID){
+        const myComment = await Comment.findByPk(item.com_id)
+        myList.push(myComment)
+      }
+      const bevAllComments = myList
+      return bevAllComments
   }
 }
 

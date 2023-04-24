@@ -36,7 +36,9 @@
                             <div class="tab-pane fade show active" id="pills-posted" role="tabpanel"
                                 aria-labelledby="pills-posted-tab">
                                 <div class="postedList">
+                                    <% let j = 0 %>
                                     <% for (item of myBevs) { %>
+                                        <a href="./beverage/<%= item.id %>" class="itemLinker">
                                         <div class="postedItem">
                                             <div class="row">
                                                 <div class="col-6">
@@ -59,13 +61,16 @@
                                                             <i style="color: #e13859" class="fa-regular fa-star"></i>
                                                           <% } %>
                                                         <div class="row">
-                                                            <h5><%= item.rating %></h5>
+                                                            <h5><%= item.rating %> (<%= createdBevComs[j].length %>)</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        
 
                                         </div>
+                                    </a>
+                                        <% j++ %>
                                         <% } %>
                                 </div>
                             </div>
@@ -73,7 +78,9 @@
                             <div class="tab-pane fade" id="pills-saved" role="tabpanel"
                                 aria-labelledby="pills-saved-tab">
                                 <div class="savedList">
+                                    <% j = 0 %>
                                     <% for (item of mySaved) { %>
+                                        <a href="./beverage/<%= item.id %>" class="itemLinker">
                                         <div class="savedItem">
                                             <div class="row">
                                                 <div class="col-6">
@@ -96,20 +103,22 @@
                                                             <i style="color: #e13859" class="fa-regular fa-star"></i>
                                                           <% } %>
                                                         <div class="row">
-                                                            <h5><%= item.rating %></h5>
+                                                            <h5><%= item.rating %> (<%= savedBevComs[j].length %>)</h5>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                         </div>
+                                    </a>
+                                        <% j = j + 1 %>
                                         <% } %>
                                 </div>
                             </div>
                             <!-- COMMENTS -->
                             <div class="tab-pane fade" id="pills-comments" role="tabpanel"
                                 aria-labelledby="pills-comments-tab">
-                                <div class="comment-section">
+                                <div class="commentList">
                                     <!--Comments-->
                                     <% for (comment of myComments) { %>
                                     <div class="row" id="comment">
@@ -158,6 +167,9 @@
                         <div class="botPart">
                             <h2 class="profileBoxText">Username: <%= currentUser.username %>
                             </h2>
+                            <div class="logoutOption">
+                                <a href="/" class="logoutButton"><h3>Logout</h3></a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -8,6 +8,10 @@
     <section class="featuredSection">
         <h1 class="sectionTitle">FEATURED</h1>
         <div class="featuredCollection">
+          <% if (bevFeatured.length == 0) { %>
+            <div class="emptyFeature"><h1>Oh no! Seems Like There Are No Featured Today... Check Back Tomorrow!</h1></div>
+          </div>
+          <% } %>
           <% for (item of bevFeatured) { %>
                 <!-- item -->
                 <a href="./beverage/<%= item.id %>" class="featuredItem" style="text-decoration: none;">
@@ -16,6 +20,7 @@
                         <div class="card-body">
                             <h5 class="card-title"><%= item.name %></h5>
                             <!-- <h5 class="card-title">item.</h5> -->
+                            
                             
                             <% for (let i=0; i < (Math.floor(item.rating)); i++) {%>
                                 <i style="color: #e13859" class="fa-solid fa-star"></i> 
@@ -26,8 +31,6 @@
                               <% for (let i=0; i < (5 - (item.rating + .99)); i++) { %>
                                 <i style="color: #e13859" class="fa-regular fa-star"></i>
                               <% } %>
-
-
                         </div>
                     </div>
                 </a>
