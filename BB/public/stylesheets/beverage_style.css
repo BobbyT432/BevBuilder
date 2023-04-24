@@ -238,3 +238,27 @@ body{
     text-align: center;
     margin-bottom: 16px;
   }
+
+  .review-range{
+    height: 80px;
+    width: 380px;
+    border-radius: 10px;
+    padding: 0 65px 0 45px;
+  }
+
+  .review-range .review-field{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  .review-range .review-field input{
+    height: 3px;
+    width: 100%;
+    background: #ddd;
+    border-radius: 5px;
+  }
+
+
