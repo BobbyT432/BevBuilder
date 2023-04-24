@@ -10,7 +10,7 @@
 
                 <form method="post" action="/drinks">
                     <div class="row" style="text-align: center; justify-content: center;">
-                        <div class="col-1">
+                        <div class="col-sm-2">
                             <div class="dropdown" name="ingredientList">
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                                     aria-expanded="false" data-bs-auto-close="outside" style="width: 200px">
@@ -56,7 +56,7 @@
                                 <img src="images/great-cocktails-9PyQwwmZxpI-unsplash.jpg" alt="Avatar"
                                     style="width:400px; height: auto; transform: translate3d(-1px,-1px,0)">
                                 <div class="container">
-                                    <h5 class="card-type">DRINK TYPE</h5>
+                                    <h5 class="card-type"><%= drink.description %></h5>
                                     <p class="card-title"><b>
                                             <%= drink.name %>
                                         </b></p>
