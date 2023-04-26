@@ -155,7 +155,9 @@ router.post('/drinks', async function (req, res, next) {
         }
       });
       
-      const newDrink = await Beverage.findByPk(bev.bev_id)
+      if (bev != null){
+        const newDrink = await Beverage.findByPk(bev.bev_id)
+      
 
       // Contains
       for (let i = 0; i < bevs.length; i++) {
@@ -167,6 +169,7 @@ router.post('/drinks', async function (req, res, next) {
       if (!isExist) {
         bevs.push(newDrink)
       }
+    }
     }
 
     console.log(bevs)
